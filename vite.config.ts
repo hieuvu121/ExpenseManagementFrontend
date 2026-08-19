@@ -16,6 +16,18 @@ export default defineConfig(() => ({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        // Chart.js is a third of the bundle and changes far less often than the
+        // app does — splitting it keeps it cached across app deploys.
+        manualChunks: {
+          charts: ["chart.js", "react-chartjs-2"],
+          router: ["react-router"],
+        },
+      },
+    },
+  },
   // Mirrors the nginx reverse proxy in the production image, so the app talks
   // to a same-origin /app/v1 in dev too and nothing has to change between the
   // two. Point at a different gateway with GATEWAY_URL if needed.

@@ -6,10 +6,15 @@ import { MobileActionBar } from "./MobileActionBar";
 import { HouseholdHeader } from "./HouseholdHeader";
 import { ViewTabs } from "./ViewTabs";
 import { EmptyState } from "../common/EmptyState";
+import { ModalRoot } from "../common/ModalRoot";
+import { Toaster } from "../common/Toaster";
 
 /**
  * Sidebar + main column. Also keeps the store's `activeId` in step with the
  * URL, so store actions know which household they are mutating.
+ *
+ * The modals live here rather than beside RouterProvider so that they sit
+ * inside the router context — they navigate after creating or joining.
  */
 export function AppShell() {
   const { householdId } = useParams();
@@ -39,6 +44,8 @@ export function AppShell() {
         )}
       </main>
       <MobileActionBar />
+      <ModalRoot />
+      <Toaster />
     </div>
   );
 }
