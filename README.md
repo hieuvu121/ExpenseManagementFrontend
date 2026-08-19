@@ -1,33 +1,31 @@
-# React + TypeScript + Vite
+# new_frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Migration target for `frontend/`. The toolchain here is matched to that
+project — same dependency versions and the same `tsconfig` / `vite` /
+`eslint` / `tailwind` / `postcss` configuration — so components can be
+ported across without also having to chase a toolchain diff.
 
-Currently, two official plugins are available:
+Stack: Vite 6 + React 18 + TypeScript 5.7 + Tailwind 3, with `vite-plugin-svgr`
+for `*.svg?react` imports.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting started
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-# ExpenseManagementFrontend
+The dev server proxies `/app/v1` and `/ws` to the API gateway at
+`http://localhost:8080`, mirroring the nginx reverse proxy in the production
+image so the app talks to a same-origin path in both. Override the target with
+`GATEWAY_URL`.
+
+## Scripts
+
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Vite dev server, listening on `0.0.0.0` |
+| `npm run build` | Type-check (`tsc -b`) then production build |
+| `npm run typecheck` | Type-check only |
+| `npm run lint` | ESLint |
+| `npm run preview` | Serve the production build |
