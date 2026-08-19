@@ -6,6 +6,9 @@ export default {
   theme: {
     fontFamily: {
       outfit: ["Outfit", "sans-serif"],
+      sans: ['"Be Vietnam Pro"', "system-ui", "sans-serif"],
+      display: ['"Bricolage Grotesque"', "sans-serif"],
+      mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
     },
     screens: {
       "2xsm": "375px",
@@ -25,6 +28,30 @@ export default {
         "theme-xs": ["12px", "18px"],
       },
       colors: {
+        // --- Housemate palette ---
+        paper: "#EDF0EA",
+        card: "#FBFCF9",
+        ink: {
+          DEFAULT: "#141F1D",
+          soft: "#5C6A64",
+          muted: "#8E9A93",
+          invert: "#F3F5F0",
+        },
+        line: {
+          DEFAULT: "#D6DCD1",
+          soft: "#E6EAE1",
+        },
+        hover: "#E3E8DF",
+        teal: {
+          DEFAULT: "#00857D",
+          dark: "#00655F",
+          wash: "#DFEDEC",
+        },
+        moss: { DEFAULT: "#1E7A4B", wash: "#E1EFE6" },
+        rose: { DEFAULT: "#C33F5C", wash: "#F6E3E7" },
+        cobalt: { DEFAULT: "#2F5FA8", wash: "#E7EDF7" },
+        gold: { DEFAULT: "#A87A1F", wash: "#F4EEDD", tint: "#F7F2E4" },
+        // --- inherited ---
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",
@@ -167,6 +194,31 @@ export default {
         99: "99",
         9: "9",
         1: "1",
+      },
+      letterSpacing: {
+        eyebrow: "0.16em",
+        label: "0.14em",
+        tag: "0.08em",
+        code: "0.12em",
+      },
+      keyframes: {
+        "sheet-up": {
+          from: { transform: "translateY(14px)", opacity: "0" },
+          to: { transform: "none", opacity: "1" },
+        },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(6px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+        shimmer: {
+          from: { backgroundPosition: "200% 0" },
+          to: { backgroundPosition: "-200% 0" },
+        },
+      },
+      animation: {
+        "sheet-up": "sheet-up .22s cubic-bezier(.2,.8,.2,1)",
+        "fade-up": "fade-up .32s both",
+        shimmer: "shimmer 1.1s linear infinite",
       },
       spacing: {
         4.5: "1.125rem",

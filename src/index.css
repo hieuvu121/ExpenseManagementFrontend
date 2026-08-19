@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Be+Vietnam+Pro:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +6,41 @@
 
 @layer base {
   body {
-    @apply relative text-base font-normal z-1 bg-gray-50 font-outfit;
+    @apply bg-paper text-ink font-sans text-[15px] leading-normal antialiased;
+  }
+
+  /* One global focus ring instead of repeating focus styles on every control. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal rounded-[3px];
+    outline-style: solid;
+  }
+}
+
+@layer utilities {
+  /* Bricolage Grotesque is a variable font — its width axis is not something
+     Tailwind can express, so the three widths the design uses live here. */
+  .disp {
+    font-variation-settings: "wdth" 82;
+  }
+  .disp-narrow {
+    font-variation-settings: "wdth" 78;
+  }
+  .disp-wide {
+    font-variation-settings: "wdth" 84;
+  }
+
+  /* Skeleton rows: a moving gradient, animated by `animate-shimmer`. */
+  .shimmer {
+    background-image: linear-gradient(90deg, #e6eae1, #eff2ec, #e6eae1);
+    background-size: 200% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
