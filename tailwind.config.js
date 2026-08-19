@@ -11,6 +11,9 @@ export default {
       mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
     },
     screens: {
+      // The prototype switches to its mobile layout at 900px, so the desktop
+      // shell starts one pixel above that.
+      shell: "901px",
       "2xsm": "375px",
       xsm: "425px",
       "3xl": "2000px",
