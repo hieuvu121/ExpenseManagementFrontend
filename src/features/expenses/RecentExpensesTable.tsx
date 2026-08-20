@@ -60,7 +60,7 @@ export function RecentExpensesTable({ household }: { household: Household }) {
             {pagination.visible.map((expense) => (
               <tr
                 key={expense.id}
-                className={cn(expense.status === "declined" && "opacity-50")}
+                className={cn("animate-enter", expense.status === "declined" && "opacity-50")}
               >
                 <td className="border-b border-line-soft py-2.5 align-middle">
                   <div className="flex items-center gap-2.5">

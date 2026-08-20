@@ -37,7 +37,7 @@ export function ExpenseFeed({ household }: { household: Household }) {
             <div
               key={expense.id}
               className={cn(
-                "grid grid-cols-[44px_1fr_auto] items-center gap-3 border-b border-line-soft px-1 py-3",
+                "animate-enter grid grid-cols-[44px_1fr_auto] items-center gap-3 border-b border-line-soft px-1 py-3",
                 expense.status !== "accepted" && "opacity-55",
               )}
             >

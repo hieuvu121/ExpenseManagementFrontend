@@ -30,6 +30,7 @@ export function usePresence(
     clearTimeout(timer.current);
 
     if (open) {
+
       setMounted(true);
       setState("entering");
       timer.current = setTimeout(
