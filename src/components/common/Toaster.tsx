@@ -1,4 +1,5 @@
 import { useToastStore } from "../../stores/useToastStore";
+import { cn } from "../../utils/cn";
 
 /**
  * Transient confirmations, stacked above the mobile action bar.
@@ -24,10 +25,11 @@ export function Toaster() {
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={
-            "flex max-w-[88vw] items-center gap-3 animate-fade-up rounded-full bg-ink " +
-            "py-2 pl-4 pr-2 text-center text-ui-sm text-ink-invert"
-          }
+          className={cn(
+            "flex max-w-[88vw] items-center gap-3 rounded-full bg-ink",
+            "py-2 pl-4 pr-2 text-center text-ui-sm text-ink-invert",
+            toast.leaving ? "animate-exit" : "animate-enter",
+          )}
         >
           <span className={toast.action ? "" : "pr-2"}>{toast.text}</span>
           {toast.action && (
