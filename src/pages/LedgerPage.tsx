@@ -24,7 +24,7 @@ export default function LedgerPage() {
           <SettlementList householdId={household.id} settlements={owed} />
 
           {pending.length > 0 && (
-            <div className="mt-3 rounded bg-gold-tint px-2.5 py-2 text-xs text-gold">
+            <div className="mt-3 rounded bg-gold-tint px-2.5 py-2 text-xs text-gold-text">
               {pending.length} pending {pending.length > 1 ? "expenses" : "expense"} (
               {vnd(pendingSum)} ₫) are not counted here yet.
             </div>

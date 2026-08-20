@@ -29,6 +29,14 @@
     font-variation-settings: "wdth" 84;
   }
 
+  /* Minimum comfortable tap target. Apple asks for 44x44pt and Google for
+     48x48dp; a mouse is far more precise, so the desktop shell tightens back
+     up. Grows the control itself rather than faking it with an invisible
+     pseudo-element, which would overlap neighbouring rows in dense lists. */
+  .tap {
+    @apply min-h-11 min-w-11 shell:min-h-[34px] shell:min-w-0;
+  }
+
   /* Skeleton rows: a moving gradient, animated by `animate-shimmer`. */
   .shimmer {
     background-image: linear-gradient(90deg, #e6eae1, #eff2ec, #e6eae1);

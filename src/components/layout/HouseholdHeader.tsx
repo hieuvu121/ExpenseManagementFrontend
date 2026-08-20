@@ -19,7 +19,7 @@ export function HouseholdHeader({ household }: { household: Household }) {
           <span className={EYEBROW}>Household</span>
           <span
             className={cn(
-              "rounded-[3px] px-[7px] py-[3px] text-[10px] font-bold uppercase tracking-[.1em]",
+              "rounded-[3px] px-[7px] py-[3px] text-[11px] font-bold uppercase tracking-[.1em]",
               isAdmin ? "bg-ink text-ink-invert" : "bg-hover text-ink-soft",
             )}
           >
@@ -37,12 +37,12 @@ export function HouseholdHeader({ household }: { household: Household }) {
       </div>
 
       <div className="flex items-center gap-2.5 rounded-md border border-dashed border-line bg-card px-2.5 py-1.5">
-        <span className="text-[11px] text-ink-muted">INVITE CODE</span>
+        <span className="text-[11px] text-ink-soft">INVITE CODE</span>
         <b className="font-mono text-sm font-semibold tracking-code">{household.code}</b>
         <button
           type="button"
           onClick={copyCode}
-          className="text-[11.5px] font-semibold text-teal hover:text-teal-dark"
+          className="tap inline-flex items-center text-[11.5px] font-semibold text-teal-dark hover:underline"
         >
           Copy
         </button>

@@ -9,9 +9,9 @@ import { Field } from "../../components/ui/Input";
 import { ApprovalNote } from "./ApprovalNote";
 
 const MARK: Record<NonNullable<Highlight["kind"]>, string> = {
-  amount: "text-teal border-teal",
-  payer: "text-cobalt border-cobalt",
-  split: "text-rose border-rose",
+  amount: "text-teal-dark border-teal",
+  payer: "text-cobalt-text border-cobalt",
+  split: "text-rose-text border-rose",
 };
 
 interface ParsedExpenseListProps {
@@ -98,14 +98,14 @@ export function ParsedExpenseList({ household, parsed, onDrop, onEdit }: ParsedE
                 <button
                   type="button"
                   onClick={() => onEdit(index)}
-                  className="text-xs font-semibold text-teal hover:text-teal-dark"
+                  className="tap inline-flex items-center text-xs font-semibold text-teal-dark hover:underline"
                 >
                   Edit or change the split
                 </button>
                 <button
                   type="button"
                   onClick={() => onDrop(index)}
-                  className="text-xs font-semibold text-rose hover:opacity-80"
+                  className="tap inline-flex items-center text-xs font-semibold text-rose-text hover:underline"
                 >
                   Drop this one
                 </button>

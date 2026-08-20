@@ -48,7 +48,7 @@ export const MoneyInput = forwardRef<HTMLInputElement, MoneyInputProps>(function
           className,
         )}
       />
-      <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-lg text-ink-muted">
+      <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-lg text-ink-soft">
         ₫
       </span>
     </div>

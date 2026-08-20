@@ -23,7 +23,7 @@ export function Sidebar() {
     >
       <div className="mb-[22px] flex items-baseline gap-2">
         <b className="disp-narrow font-display text-[21px] font-extrabold">Housemate</b>
-        <span className="text-[11px] text-ink-muted">shared household expenses</span>
+        <span className="text-[11px] text-ink-soft">shared household expenses</span>
       </div>
 
       <div className="mb-[22px] rounded-md border border-line bg-card px-[13px] py-3">
@@ -32,7 +32,7 @@ export function Sidebar() {
           className={cn(
             NUM,
             "mt-[3px] text-[25px] font-semibold",
-            total > 0 ? "text-moss" : total < 0 ? "text-rose" : "",
+            total > 0 ? "text-moss-text" : total < 0 ? "text-rose-text" : "",
           )}
         >
           {signed(total)} ₫
@@ -70,7 +70,7 @@ export function Sidebar() {
             >
               <span className="flex-1 truncate">{household.name}</span>
               {pending > 0 && (
-                <span className="grid h-[17px] min-w-[17px] place-items-center rounded-full bg-gold px-1 text-[10px] font-bold text-white">
+                <span className="grid h-[17px] min-w-[17px] place-items-center rounded-full bg-gold-text px-1 text-[11px] font-bold text-white">
                   {pending}
                 </span>
               )}

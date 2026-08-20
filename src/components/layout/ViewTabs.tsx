@@ -20,7 +20,7 @@ export function ViewTabs({ householdId }: { householdId: string }) {
           className={({ isActive }) =>
             cn(
               "-mb-0.5 border-b-2 pb-2.5 text-sm font-semibold",
-              isActive ? "border-ink text-ink" : "border-transparent text-ink-muted hover:text-ink-soft",
+              isActive ? "border-ink text-ink" : "border-transparent text-ink-soft hover:text-ink",
             )
           }
         >

@@ -5,6 +5,8 @@ import { PALETTE } from "../../constants/palette";
 import type { Household } from "../../types/domain";
 import { daysAgo, sameDay, WEEKDAYS, dmy } from "../../utils/date";
 import { isLive } from "../../utils/balances";
+import { money } from "./chartTheme";
+import { ChartTable } from "./ChartTable";
 
 /** Last 7 days of household spend. Bars go red on days over the daily limit. */
 export function DailyExpenseChart({ household }: { household: Household }) {
@@ -54,5 +56,14 @@ export function DailyExpenseChart({ household }: { household: Household }) {
     },
   };
 
-  return <ReactChart type="bar" data={data} options={options} />;
+  return (
+    <>
+      <ReactChart type="bar" data={data} options={options} />
+      <ChartTable
+        caption={`Household spend for the last 7 days, against a daily limit of ${money(household.budget)}.`}
+        columns={["Day", "Spent"]}
+        rows={days.map((d) => [d.label, money(d.total)])}
+      />
+    </>
+  );
 }

@@ -11,7 +11,7 @@ interface MoneyProps {
 }
 
 export function Money({ value, withSign, unit, className }: MoneyProps) {
-  const tone = withSign ? (value > 0 ? "text-moss" : value < 0 ? "text-rose" : "") : "";
+  const tone = withSign ? (value > 0 ? "text-moss-text" : value < 0 ? "text-rose-text" : "") : "";
   return (
     <span className={cn(NUM, tone, className)}>
       {withSign ? signed(value) : vnd(value)}

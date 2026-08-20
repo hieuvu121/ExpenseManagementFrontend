@@ -15,6 +15,11 @@ import { ManualExpenseForm } from "./ManualExpenseForm";
 import { PasteTextForm } from "./PasteTextForm";
 import { emptyDraft, type ExpenseDraft } from "./expenseDraft";
 
+const TABS: { id: ExpenseTab; label: string }[] = [
+  { id: "manual", label: "Manual" },
+  { id: "ai", label: "Paste text" },
+];
+
 /**
  * The two-tab add-expense sheet. Draft state is local rather than in a store:
  * it exists only while the sheet is open, and closing it should discard it.
@@ -105,6 +110,15 @@ export function ExpenseModal() {
     });
   };
 
+  /** Left/Right cycle the tablist, as the ARIA tabs pattern requires. */
+  const onTabKey = (e: React.KeyboardEvent) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    const next = TABS[(TABS.findIndex((t) => t.id === draft.tab) + 1) % TABS.length];
+    patch({ tab: next.id });
+    document.getElementById(`expense-tab-${next.id}`)?.focus();
+  };
+
   const keepingCount = (draft.parsed ?? []).filter((p) => !p.dropped).length;
 
   const footer =
@@ -131,36 +145,53 @@ export function ExpenseModal() {
       footer={footer}
       belowHeader={
         <div className="pt-3">
-          <div className="mx-5 flex gap-1 rounded-md bg-hover p-[3px]" role="tablist">
-            {(["manual", "ai"] as ExpenseTab[]).map((tab) => (
+          <div
+            role="tablist"
+            aria-label="How to add the expense"
+            className="mx-5 flex gap-1 rounded-md bg-hover p-[3px]"
+          >
+            {TABS.map(({ id, label }) => (
               <button
-                key={tab}
+                key={id}
+                id={`expense-tab-${id}`}
                 role="tab"
-                aria-selected={draft.tab === tab}
-                onClick={() => patch({ tab })}
+                type="button"
+                aria-selected={draft.tab === id}
+                aria-controls={`expense-panel-${id}`}
+                // Roving tabindex: the tablist is one Tab stop, and Left/Right
+                // move between the tabs inside it.
+                tabIndex={draft.tab === id ? 0 : -1}
+                onKeyDown={onTabKey}
+                onClick={() => patch({ tab: id })}
                 className={cn(
-                  "flex-1 rounded p-2 text-[13.5px] font-semibold transition-colors",
-                  draft.tab === tab ? "bg-card text-ink" : "text-ink-soft hover:text-ink",
+                  "tap flex-1 rounded p-2 text-[13.5px] font-semibold transition-colors",
+                  draft.tab === id ? "bg-card text-ink" : "text-ink-soft hover:text-ink",
                 )}
               >
-                {tab === "manual" ? "Manual" : "Paste text"}
+                {label}
               </button>
             ))}
           </div>
         </div>
       }
     >
-      {draft.tab === "manual" ? (
-        <ManualExpenseForm household={household} draft={draft} patch={patch} />
-      ) : (
-        <PasteTextForm
-          household={household}
-          draft={draft}
-          patch={patch}
-          onParse={() => patch({ parsed: parseExpenseText(draft.text, household) })}
-          onEdit={editParsed}
-        />
-      )}
+      <div
+        id={`expense-panel-${draft.tab}`}
+        role="tabpanel"
+        aria-labelledby={`expense-tab-${draft.tab}`}
+      >
+        {draft.tab === "manual" ? (
+          <ManualExpenseForm household={household} draft={draft} patch={patch} />
+        ) : (
+          <PasteTextForm
+            household={household}
+            draft={draft}
+            patch={patch}
+            onParse={() => patch({ parsed: parseExpenseText(draft.text, household) })}
+            onEdit={editParsed}
+          />
+        )}
+      </div>
     </Sheet>
   );
 }

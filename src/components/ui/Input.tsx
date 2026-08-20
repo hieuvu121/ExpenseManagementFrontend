@@ -39,7 +39,7 @@ export function Field({ label, htmlFor, aside, children, className }: FieldProps
       <div className="mb-1.5 flex items-baseline justify-between gap-3">
         <label
           htmlFor={htmlFor}
-          className="text-[11px] font-semibold uppercase tracking-label text-ink-muted"
+          className="text-[11px] font-semibold uppercase tracking-label text-ink-soft"
         >
           {label}
         </label>

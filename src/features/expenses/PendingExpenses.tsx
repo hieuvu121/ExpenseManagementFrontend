@@ -107,21 +107,21 @@ function PendingRow({ expense, first, isAdmin, onApprove, onDecline, onWithdraw 
         </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <span className={cn(NUM, "text-[15px] font-semibold")}>{vnd(expense.amount)} ₫</span>
         {isAdmin ? (
           <>
             <button
               type="button"
               onClick={onApprove}
-              className="rounded-full border border-moss px-[11px] py-[5px] text-[12.5px] font-semibold text-moss hover:bg-moss hover:text-white"
+              className="tap inline-flex items-center justify-center rounded-full border border-moss px-3.5 py-[5px] text-[12.5px] font-semibold text-moss-text hover:bg-moss hover:text-white"
             >
               Approve
             </button>
             <button
               type="button"
               onClick={onDecline}
-              className="rounded-full border border-line px-[11px] py-[5px] text-[12.5px] font-semibold text-ink-soft hover:border-rose hover:text-rose"
+              className="tap inline-flex items-center justify-center rounded-full border border-line px-3.5 py-[5px] text-[12.5px] font-semibold text-ink-soft hover:border-rose hover:text-rose-text"
             >
               Decline
             </button>
@@ -130,12 +130,12 @@ function PendingRow({ expense, first, isAdmin, onApprove, onDecline, onWithdraw 
           <button
             type="button"
             onClick={onWithdraw}
-            className="rounded-full border border-line px-[11px] py-[5px] text-[12.5px] font-semibold text-ink-soft hover:border-rose hover:text-rose"
+            className="tap inline-flex items-center justify-center rounded-full border border-line px-3.5 py-[5px] text-[12.5px] font-semibold text-ink-soft hover:border-rose hover:text-rose-text"
           >
             Withdraw
           </button>
         ) : (
-          <span className="text-xs font-semibold text-gold">Waiting</span>
+          <span className="text-xs font-semibold text-gold-text">Waiting</span>
         )}
       </div>
     </div>

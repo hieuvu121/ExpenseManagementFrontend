@@ -17,7 +17,7 @@ function Tile({ label, value, hint, tone }: TileProps) {
     <div className="rounded-md border border-line bg-card px-3.5 py-[13px]">
       <div className={EYEBROW}>{label}</div>
       <div className={cn(NUM, "mt-[5px] text-[23px] font-semibold", tone)}>{value}</div>
-      <div className="mt-0.5 text-[11.5px] text-ink-muted">{hint}</div>
+      <div className="mt-0.5 text-[11.5px] text-ink-soft">{hint}</div>
     </div>
   );
 }
@@ -48,7 +48,7 @@ export function SummaryTiles({ household }: { household: Household }) {
       <Tile
         label="Your balance"
         value={Math.abs(net) < SETTLED_THRESHOLD ? "0" : signed(net)}
-        tone={net > SETTLED_THRESHOLD ? "text-moss" : net < -SETTLED_THRESHOLD ? "text-rose" : ""}
+        tone={net > SETTLED_THRESHOLD ? "text-moss-text" : net < -SETTLED_THRESHOLD ? "text-rose-text" : ""}
         hint={
           net > SETTLED_THRESHOLD
             ? "the house owes you"
@@ -60,7 +60,7 @@ export function SummaryTiles({ household }: { household: Household }) {
       <Tile
         label="Awaiting approval"
         value={String(pending.length)}
-        tone="text-gold"
+        tone="text-gold-text"
         hint={pending.length ? `${vnd(pendingSum)} ₫ not in the ledger` : "nothing left to review"}
       />
     </div>

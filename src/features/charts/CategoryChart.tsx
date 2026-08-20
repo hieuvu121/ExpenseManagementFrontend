@@ -6,6 +6,7 @@ import type { CategoryId, Household } from "../../types/domain";
 import { isLive } from "../../utils/balances";
 import { sameMonth, TODAY } from "../../utils/date";
 import { money } from "./chartTheme";
+import { ChartTable } from "./ChartTable";
 import { EmptyState } from "../../components/common/EmptyState";
 
 /** This month's approved spend, split by category. */
@@ -48,5 +49,20 @@ export function CategoryChart({ household }: { household: Household }) {
     },
   };
 
-  return <Doughnut data={data} options={options} />;
+  const total = keys.reduce((sum, k) => sum + totals[k], 0);
+
+  return (
+    <>
+      <Doughnut data={data} options={options} />
+      <ChartTable
+        caption={`This month's approved spend by category, ${money(total)} in total.`}
+        columns={["Category", "Spent", "Share"]}
+        rows={keys.map((k) => [
+          CATEGORIES[k].label,
+          money(totals[k]),
+          `${Math.round((totals[k] / total) * 100)}%`,
+        ])}
+      />
+    </>
+  );
 }

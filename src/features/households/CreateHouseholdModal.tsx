@@ -53,7 +53,7 @@ export function CreateHouseholdModal() {
                 await navigator.clipboard?.writeText(created.code);
                 toast(`Copied invite code ${created.code}`);
               }}
-              className="text-[11.5px] font-semibold text-teal hover:text-teal-dark"
+              className="tap inline-flex items-center text-[11.5px] font-semibold text-teal-dark hover:underline"
             >
               Copy
             </button>
@@ -126,6 +126,8 @@ export function CreateHouseholdModal() {
             <Chip
               key={member}
               pressed
+              select="none"
+              ariaLabel={member === ME ? `${member} (you, admin)` : `Remove ${member}`}
               onClick={() => member !== ME && setMembers(members.filter((m) => m !== member))}
             >
               {member}

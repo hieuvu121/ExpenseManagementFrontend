@@ -5,6 +5,8 @@ import { PALETTE } from "../../constants/palette";
 import type { Household } from "../../types/domain";
 import { daysAgo, dmy, MONTHS, sameDay, sameMonth, TODAY, WEEKDAYS } from "../../utils/date";
 import { isLive } from "../../utils/balances";
+import { money } from "./chartTheme";
+import { ChartTable } from "./ChartTable";
 
 export type StatsMode = "day" | "week" | "month";
 
@@ -94,5 +96,16 @@ export function StatisticsChart({ household, mode }: { household: Household; mod
     },
   };
 
-  return <Line data={data} options={options} />;
+  const period = mode === "day" ? "day" : mode === "week" ? "week" : "month";
+
+  return (
+    <>
+      <Line data={data} options={options} />
+      <ChartTable
+        caption={`Household spend per ${period}, against a limit of ${money(target)} per ${period}.`}
+        columns={[period === "day" ? "Day" : period === "week" ? "Week of" : "Month", "Spent"]}
+        rows={series.map((b) => [b.label, money(b.total)])}
+      />
+    </>
+  );
 }

@@ -56,10 +56,11 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
       </Field>
 
       <Field label="Category">
-        <div className="flex flex-wrap gap-1.5">
+        <div role="radiogroup" aria-label="Category" className="flex flex-wrap gap-1.5">
           {CATEGORY_LIST.map((category) => (
             <Chip
               key={category.id}
+              select="radio"
               pressed={draft.category === category.id}
               onClick={() => patch({ category: category.id })}
             >
@@ -71,11 +72,12 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
       </Field>
 
       <Field label="Who paid">
-        <div className="flex flex-wrap gap-1.5">
+        <div role="radiogroup" aria-label="Who paid" className="flex flex-wrap gap-1.5">
           {household.members.map((member) => (
             <Chip
               key={member}
               tone="teal"
+              select="radio"
               pressed={draft.payer === member}
               onClick={() => patch({ payer: member })}
             >
@@ -92,13 +94,13 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
           <button
             type="button"
             onClick={() => patch({ participants: allSelected ? [] : [...household.members] })}
-            className="text-xs font-semibold text-teal hover:text-teal-dark"
+            className="tap inline-flex items-center text-xs font-semibold text-teal-dark hover:underline"
           >
             {allSelected ? "Clear all" : "Select all"}
           </button>
         }
       >
-        <div className="flex flex-wrap gap-1.5">
+        <div role="group" aria-label="Split between" className="flex flex-wrap gap-1.5">
           {household.members.map((member) => (
             <Chip
               key={member}
@@ -112,9 +114,10 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
       </Field>
 
       <Field label="How to split">
-        <div className="flex flex-wrap gap-1.5">
+        <div role="radiogroup" aria-label="How to split" className="flex flex-wrap gap-1.5">
           <Chip
             tone="teal"
+            select="radio"
             pressed={draft.splitMode === "even"}
             onClick={() => patch({ splitMode: "even" })}
           >
@@ -122,6 +125,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
           </Chip>
           <Chip
             tone="teal"
+            select="radio"
             pressed={draft.splitMode === "custom"}
             onClick={() =>
               patch({
@@ -170,7 +174,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
             <div
               className={cn(
                 "mt-2 text-[12.5px] font-semibold",
-                difference === 0 && total ? "text-moss" : "text-rose",
+                difference === 0 && total ? "text-moss-text" : "text-rose-text",
               )}
             >
               {!total

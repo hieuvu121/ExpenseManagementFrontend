@@ -32,12 +32,16 @@ export default {
       },
       colors: {
         // --- Housemate palette ---
+        // Every value below is measured against the surface it sits on: text
+        // tokens clear WCAG AA (4.5:1) on `paper` and `card`, and the `-wash`
+        // tokens are backgrounds only. Run the contrast check before changing
+        // any of them — several of the originals were as low as 2.5:1.
         paper: "#EDF0EA",
         card: "#FBFCF9",
         ink: {
           DEFAULT: "#141F1D",
-          soft: "#5C6A64",
-          muted: "#8E9A93",
+          soft: "#5C6A64", // 4.93 on paper — the only secondary text grey
+          muted: "#8E9A93", // 2.54 on paper: DECORATIVE ONLY (dots, rules)
           invert: "#F3F5F0",
         },
         line: {
@@ -45,15 +49,12 @@ export default {
           soft: "#E6EAE1",
         },
         hover: "#E3E8DF",
-        teal: {
-          DEFAULT: "#00857D",
-          dark: "#00655F",
-          wash: "#DFEDEC",
-        },
-        moss: { DEFAULT: "#1E7A4B", wash: "#E1EFE6" },
-        rose: { DEFAULT: "#C33F5C", wash: "#F6E3E7" },
-        cobalt: { DEFAULT: "#2F5FA8", wash: "#E7EDF7" },
-        gold: { DEFAULT: "#A87A1F", wash: "#F4EEDD", tint: "#F7F2E4" },
+        // `DEFAULT` fills backgrounds; `dark`/`text` colour the glyphs.
+        teal: { DEFAULT: "#00857D", dark: "#00655F", wash: "#DFEDEC" },
+        moss: { DEFAULT: "#1E7A4B", text: "#17603B", wash: "#E1EFE6" },
+        rose: { DEFAULT: "#C33F5C", text: "#A32B46", wash: "#F6E3E7" },
+        cobalt: { DEFAULT: "#2F5FA8", text: "#2A5596", wash: "#E7EDF7" },
+        gold: { DEFAULT: "#A87A1F", text: "#8A6314", wash: "#F4EEDD", tint: "#F7F2E4" },
         // --- inherited ---
         current: "currentColor",
         transparent: "transparent",

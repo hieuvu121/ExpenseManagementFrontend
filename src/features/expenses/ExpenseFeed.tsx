@@ -43,7 +43,7 @@ export function ExpenseFeed({ household }: { household: Household }) {
             >
               <div className="text-center leading-[1.1]">
                 <div className={cn(NUM, "text-[15px] font-semibold")}>{dmy(expense.date)}</div>
-                <div className="text-[9.5px] uppercase tracking-tag text-ink-muted">
+                <div className="text-[11px] uppercase tracking-tag text-ink-soft">
                   {MONTHS[expense.date.getMonth()]}
                 </div>
               </div>
@@ -66,7 +66,7 @@ export function ExpenseFeed({ household }: { household: Household }) {
                 <div className={cn(NUM, "text-[14.5px] font-semibold")}>
                   {vnd(expense.amount)} ₫
                 </div>
-                <div className={cn(NUM, "text-[11.5px] text-ink-muted")}>
+                <div className={cn(NUM, "text-[11.5px] text-ink-soft")}>
                   {mine ? `your share ${vnd(mine)}` : "not your split"}
                 </div>
               </div>

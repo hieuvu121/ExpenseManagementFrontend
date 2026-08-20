@@ -84,7 +84,7 @@ export function JoinHouseholdModal() {
         />
 
         {error ? (
-          <div className="mt-1.5 text-[12.5px] text-rose">{error}</div>
+          <div className="mt-1.5 text-[12.5px] text-rose-text">{error}</div>
         ) : (
           <div className="mt-1.5 text-xs text-ink-soft">
             Ask the household admin for it. Try <b>TB9K3M</b> to see how it works.

@@ -31,7 +31,7 @@ export function RecentExpensesTable({ household }: { household: Household }) {
         action={
           <Link
             to={`/households/${household.id}/ledger`}
-            className="text-xs font-semibold text-teal hover:text-teal-dark"
+            className="tap inline-flex items-center text-xs font-semibold text-teal-dark hover:underline"
           >
             See all →
           </Link>
@@ -46,7 +46,7 @@ export function RecentExpensesTable({ household }: { household: Household }) {
                 <th
                   key={head}
                   className={cn(
-                    "border-b border-line pb-2 text-[10px] font-semibold uppercase tracking-label text-ink-muted",
+                    "border-b border-line pb-2 text-[11px] font-semibold uppercase tracking-label text-ink-soft",
                     i === 1 && "hidden shell:table-cell",
                     i >= 2 ? "text-right" : "text-left",
                   )}
@@ -67,7 +67,7 @@ export function RecentExpensesTable({ household }: { household: Household }) {
                     <Avatar name={expense.payer} />
                     <span>
                       <span className="block font-medium">{expense.payer}</span>
-                      <span className="block text-xs text-ink-muted">{expense.title}</span>
+                      <span className="block text-xs text-ink-soft">{expense.title}</span>
                     </span>
                   </div>
                 </td>

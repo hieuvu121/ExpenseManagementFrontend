@@ -19,7 +19,7 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
 
   return (
     <>
-      <div className={cn(EYEBROW, "mb-2.5 flex justify-between text-[10px] tracking-[.1em]")}>
+      <div className={cn(EYEBROW, "mb-2.5 flex justify-between tracking-[.1em]")}>
         <span>Owes</span>
         <span>Is owed</span>
       </div>
@@ -38,7 +38,7 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
               {name}
               {name === household.admin && " ★"}
               {name === ME && (
-                <span className="ml-1.5 text-[9.5px] font-semibold uppercase tracking-tag text-ink-muted">
+                <span className="ml-1.5 text-[11px] font-semibold uppercase tracking-tag text-ink-soft">
                   you
                 </span>
               )}
@@ -68,7 +68,7 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
               className={cn(
                 NUM,
                 "text-right text-xs font-medium shell:text-[13px]",
-                owed ? "text-moss" : owes ? "text-rose" : "text-ink-muted",
+                owed ? "text-moss-text" : owes ? "text-rose-text" : "text-ink-soft",
               )}
             >
               {Math.abs(value) < SETTLED_THRESHOLD ? "0" : signed(value)}

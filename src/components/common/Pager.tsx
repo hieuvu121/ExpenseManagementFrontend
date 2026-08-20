@@ -25,7 +25,7 @@ export function Pager({ pagination, pageSize, skeletonColumns }: PagerProps) {
     <>
       {loading && <SkeletonRows columns={skeletonColumns} />}
       <div className="flex flex-wrap items-center gap-3 pt-[13px]">
-        <span className="text-xs text-ink-muted">
+        <span className="text-xs text-ink-soft">
           Showing {visible.length} of {total}
         </span>
 
@@ -34,7 +34,7 @@ export function Pager({ pagination, pageSize, skeletonColumns }: PagerProps) {
             title="The token sent to fetch the next page"
             className={cn(
               "max-w-[190px] truncate rounded-[3px] border border-line-soft bg-paper",
-              "px-1.5 py-0.5 font-mono text-[10.5px] text-ink-muted",
+              "px-1.5 py-0.5 font-mono text-[11px] text-ink-soft",
             )}
           >
             cursor: {cursor}
@@ -42,14 +42,14 @@ export function Pager({ pagination, pageSize, skeletonColumns }: PagerProps) {
         )}
 
         {done ? (
-          <span className="ml-auto text-xs text-ink-muted">End of list</span>
+          <span className="ml-auto text-xs text-ink-soft">End of list</span>
         ) : (
           <button
             type="button"
             onClick={loadMore}
             disabled={loading}
             className={cn(
-              "ml-auto rounded-full border border-line bg-paper px-3.5 py-1.5",
+              "tap ml-auto inline-flex items-center justify-center rounded-full border border-line bg-paper px-3.5 py-1.5",
               "text-[12.5px] font-semibold text-ink hover:border-ink",
               "disabled:cursor-default disabled:opacity-55",
             )}

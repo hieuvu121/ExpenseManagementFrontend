@@ -6,7 +6,7 @@
 export const PALETTE = {
   card: "#FBFCF9",
   line: "#E6EAE1",
-  tick: "#8E9A93",
+  tick: "#5C6A64", // axis labels are text: needs 4.5:1, not the decorative grey
   teal: "#00857D",
   gold: "#A87A1F",
   rose: "#C33F5C",
