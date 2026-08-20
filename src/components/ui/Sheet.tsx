@@ -1,5 +1,6 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useContext, useEffect, useRef, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { SheetPresence } from "../common/SheetPresence";
 
 interface SheetProps {
   title: string;
@@ -15,15 +16,9 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), ' +
   'select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-/**
- * Modal dialog. Closes on Escape and on a click that starts and ends on the
- * scrim itself, so a drag out of the sheet does not dismiss it.
- *
- * Keyboard contract: focus moves into the panel on open, Tab cycles inside it
- * rather than escaping to the page behind, and the element that opened the
- * sheet gets focus back on close.
- */
 export function Sheet({ title, onClose, children, footer, belowHeader }: SheetProps) {
+  const presence = useContext(SheetPresence);
+  const exiting = presence === "exiting";
   const scrimRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const pressedScrim = useRef(false);
@@ -71,7 +66,10 @@ export function Sheet({ title, onClose, children, footer, belowHeader }: SheetPr
       }}
       // Bottom sheet on a phone, centred dialog from `sm` up — welding a sheet
       // to the bottom edge of a 1440px window reads as a layout bug.
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ink/[.42] sm:items-center sm:p-6"
+      className={cn(
+        "fixed inset-0 z-50 flex items-end justify-center bg-ink/[.42] sm:items-center sm:p-6",
+        exiting ? "animate-fade-out" : "animate-fade-in",
+      )}
     >
       <div
         ref={panelRef}
@@ -82,7 +80,8 @@ export function Sheet({ title, onClose, children, footer, belowHeader }: SheetPr
         className={cn(
           // dvh, not vh: on iOS Safari `vh` ignores the collapsing toolbar and
           // pushes the sticky footer under the browser chrome.
-          "max-h-[92dvh] w-full max-w-[560px] animate-sheet-up overflow-auto",
+          "max-h-[92dvh] w-full max-w-[560px] overflow-auto",
+          exiting ? "animate-sheet-out" : "animate-sheet-in",
           "rounded-t-xl border border-b-0 border-line bg-paper outline-none",
           "sm:rounded-xl sm:border-b",
         )}
