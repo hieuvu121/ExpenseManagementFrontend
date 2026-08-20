@@ -60,8 +60,10 @@ export function Sidebar() {
                 cn(
                   "flex flex-none items-center gap-2.5 rounded-md p-2.5 text-sm",
                   "border border-line bg-card shell:w-full shell:flex-1 shell:border-0 shell:bg-transparent",
+                  // The selected state has to read at every width — without the
+                  // unprefixed classes the mobile scroller gave no "you are here".
                   isActive
-                    ? "shell:bg-ink shell:text-ink-invert"
+                    ? "border-ink bg-ink text-ink-invert shell:bg-ink shell:text-ink-invert"
                     : "text-ink-soft hover:bg-hover",
                 )
               }
@@ -82,9 +84,11 @@ export function Sidebar() {
 
       <div className="my-4 hidden h-px bg-line shell:block" />
 
-      <div className="hidden shell:block">
-        <SidebarLink onClick={() => openModal("create")}>+ &nbsp;Create a household</SidebarLink>
-        <SidebarLink onClick={() => openModal("join")}>⌗ &nbsp;Join with a code</SidebarLink>
+      {/* Two buttons side by side on a phone, a stacked list on the desktop
+          shell. Previously desktop-only, which left mobile with no way in. */}
+      <div className="mt-3 grid grid-cols-2 gap-2 shell:mt-0 shell:block shell:gap-0">
+        <SidebarLink onClick={() => openModal("create")}>+&nbsp;&nbsp;Create a household</SidebarLink>
+        <SidebarLink onClick={() => openModal("join")}>⌗&nbsp;&nbsp;Join with a code</SidebarLink>
       </div>
     </aside>
   );
@@ -95,7 +99,11 @@ function SidebarLink({ onClick, children }: { onClick: () => void; children: Rea
     <button
       type="button"
       onClick={onClick}
-      className="block w-full rounded-md px-2.5 py-[7px] text-left text-[13.5px] text-ink-soft hover:bg-hover hover:text-ink"
+      className={cn(
+        "block w-full rounded-md px-2.5 py-[7px] text-[13.5px] text-ink-soft hover:bg-hover hover:text-ink",
+        "border border-line bg-card text-center",
+        "shell:border-0 shell:bg-transparent shell:text-left",
+      )}
     >
       {children}
     </button>

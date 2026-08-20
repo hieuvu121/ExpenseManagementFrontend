@@ -39,7 +39,7 @@ const setStatus = (id: number, status: Expense["status"]) => (h: Household) => (
 
 export const useHouseholdStore = create<HouseholdState>()((set) => ({
   households: seeded,
-  activeId: seeded[0].id,
+  activeId: seeded[0]?.id ?? "",
 
   setActive: (id) => set({ activeId: id }),
 
