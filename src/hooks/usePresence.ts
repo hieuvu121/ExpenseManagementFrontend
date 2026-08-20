@@ -45,8 +45,11 @@ export function usePresence(
     }
 
     return () => clearTimeout(timer.current);
-    // `mounted` is deliberately excluded: including it would restart the exit timer
-    // when the exit itself sets mounted false, and the element would never unmount.
+    // `mounted` is read above but deliberately not a dependency. Including it
+    // re-runs the effect the moment `setMounted(true)` lands, which clears the
+    // enter timer and restarts it — harmless, but it delays the entering->present
+    // flip by a render for no benefit. The effect only ever needs to react to
+    // `open` changing.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, name]);
 

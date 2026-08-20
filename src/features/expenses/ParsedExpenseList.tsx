@@ -79,8 +79,7 @@ export function ParsedExpenseList({ household, parsed, onDrop, onEdit }: ParsedE
           expense.dropped ? null : (
             <div
               key={index}
-              className="mt-2.5 animate-fade-up rounded-md border border-line bg-card px-3.5 py-3"
-              style={{ animationDelay: `${index * 60}ms` }}
+              className="mt-2.5 animate-enter rounded-md border border-line bg-card px-3.5 py-3"
             >
               <div className="flex items-baseline gap-2.5">
                 <span className="flex-1 text-ui-base font-semibold">{expense.title}</span>
