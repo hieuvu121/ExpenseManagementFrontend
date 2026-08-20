@@ -77,10 +77,6 @@ export default {
         code: "0.12em",
       },
       keyframes: {
-        // `fade-in`/`fade-out` are shared with the ::view-transition rules in
-        // index.css, which is why they are named plainly.
-        "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
-        "fade-out": { from: { opacity: "1" }, to: { opacity: "0" } },
         enter: {
           from: { opacity: "0", transform: "translateY(var(--travel))" },
           to: { opacity: "1", transform: "none" },
@@ -90,12 +86,12 @@ export default {
           to: { opacity: "0", transform: "translateY(var(--travel))" },
         },
         "sheet-in": {
-          from: { opacity: "0", transform: "translateY(var(--travel))" },
+          from: { opacity: "0", transform: "translateY(var(--travel-lg))" },
           to: { opacity: "1", transform: "none" },
         },
         "sheet-out": {
           from: { opacity: "1", transform: "none" },
-          to: { opacity: "0", transform: "translateY(var(--travel))" },
+          to: { opacity: "0", transform: "translateY(var(--travel-lg))" },
         },
         shimmer: {
           from: { backgroundPosition: "200% 0" },
@@ -103,6 +99,11 @@ export default {
         },
       },
       animation: {
+        // fade-in/fade-out keyframes are declared in index.css, not here: the
+        // ::view-transition pseudo-elements reference them by name and must not
+        // depend on Tailwind's JIT having seen an `animate-fade-*` class.
+        "fade-in": "fade-in var(--dur-base) var(--ease-standard) both",
+        "fade-out": "fade-out var(--dur-quick) var(--ease-exit) both",
         enter: "enter var(--dur-base) var(--ease-standard) both",
         exit: "exit var(--dur-base) var(--ease-exit) both",
         "sheet-in": "sheet-in var(--dur-slow) var(--ease-standard) both",

@@ -11,9 +11,9 @@
  */
 export const DURATION = {
   instant: 90, // hover, focus, press
-  quick: 140, // toggles, chips, tab switch
+  quick: 300, // toggles, chips, tab switch
   base: 200, // list rows, cards, toasts
-  slow: 280, // sheet, route change
+  slow: 800, // sheet, route change — the rare, deliberate moments
 } as const;
 
 /**
@@ -35,8 +35,18 @@ export const EASING = {
   exit: "cubic-bezier(.4, 0, 1, 1)",
 } as const;
 
-/** The only distance anything moves. Becomes 0px under reduced motion. */
+/**
+ * How far things move. Two values, not one.
+ *
+ * `TRAVEL` is for the everyday — list rows, toasts — where 8px is plenty and more
+ * would be noise. `TRAVEL_LG` is for the sheet and page changes: a modal rising
+ * 8px is so subtle it reads as a flicker rather than an arrival, and a crossfade
+ * between two similar layouts gives the eye nothing to follow.
+ *
+ * Both become 0px under reduced motion.
+ */
 export const TRAVEL = "8px";
+export const TRAVEL_LG = "16px";
 
 /** The `:root` custom-property block, for the Tailwind plugin to emit. */
 export function motionVars(reduced: boolean): Record<string, string> {
@@ -49,5 +59,6 @@ export function motionVars(reduced: boolean): Record<string, string> {
     "--ease-standard": EASING.standard,
     "--ease-exit": EASING.exit,
     "--travel": reduced ? "0px" : TRAVEL,
+    "--travel-lg": reduced ? "0px" : TRAVEL_LG,
   };
 }

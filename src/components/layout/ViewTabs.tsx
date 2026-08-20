@@ -16,6 +16,7 @@ export function ViewTabs({ householdId }: { householdId: string }) {
       {TABS.map((tab) => (
         <NavLink
           key={tab.to}
+          viewTransition
           to={`/households/${householdId}/${tab.to}`}
           className={({ isActive }) =>
             cn(

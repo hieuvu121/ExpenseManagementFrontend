@@ -34,7 +34,7 @@ export function AppShell() {
           of empty paper on a 1920px screen. The tall bottom padding clears the
           fixed MobileActionBar, which is shell:hidden — so the desktop shell
           does not need it. */}
-      <main className="mx-auto w-full max-w-[1000px] px-4 pb-32 pt-4.5 shell:px-7.5 shell:pb-10 shell:pt-6">
+      <main className="mx-auto w-full max-w-[1000px] [view-transition-name:page] px-4 pb-32 pt-4.5 shell:px-7.5 shell:pb-10 shell:pt-6">
         {household ? (
           <>
             <HouseholdHeader household={household} />

@@ -54,3 +54,71 @@
     animation: none !important;
   }
 }
+
+/* Declared by hand rather than in tailwind.config.js. Tailwind only emits a
+   @keyframes block when it has seen a class that uses it, and the
+   ::view-transition rules below are plain CSS — they reference these by name, so
+   a JIT-generated definition would vanish the moment the last `animate-fade-*`
+   class was removed from a component. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Page transitions slide left-to-right as they fade: the outgoing page leaves to
+   the right, the incoming one arrives from the left, so both travel the same
+   direction and the change reads as a push rather than a dissolve.
+
+   Horizontal travel needs more distance than vertical to register, so these use
+   double the large travel token rather than a token of their own — which also
+   means reduced motion still zeroes them (2 x 0px is 0px). */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-2 * var(--travel-lg)));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(calc(2 * var(--travel-lg)));
+  }
+}
+
+/* Without naming the content area, the browser snapshots the whole page as `root`
+   and the sidebar crossfades too — on a tab switch, where the sidebar has not
+   changed, that reads as a flicker. Naming `main` lets the shell hold still. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(page) {
+  animation: page-out var(--dur-base) var(--ease-exit) both;
+}
+
+::view-transition-new(page) {
+  animation: page-in var(--dur-slow) var(--ease-standard) both;
+}

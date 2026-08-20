@@ -55,6 +55,7 @@ export function Sidebar() {
           return (
             <NavLink
               key={household.id}
+              viewTransition
               to={`/households/${household.id}/dashboard`}
               className={({ isActive }) =>
                 cn(

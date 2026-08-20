@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DURATION, DURATION_REDUCED, motionVars, TRAVEL } from "./motion";
+import { DURATION, DURATION_REDUCED, motionVars, TRAVEL, TRAVEL_LG } from "./motion";
 
 describe("motionVars", () => {
   it("emits every duration as a CSS custom property in ms", () => {
@@ -10,8 +10,9 @@ describe("motionVars", () => {
     expect(vars["--dur-slow"]).toBe(`${DURATION.slow}ms`);
   });
 
-  it("emits the full travel distance normally", () => {
+  it("emits both travel distances normally", () => {
     expect(motionVars(false)["--travel"]).toBe(TRAVEL);
+    expect(motionVars(false)["--travel-lg"]).toBe(TRAVEL_LG);
   });
 
   // The whole reduced-motion policy rests on this: movement goes to zero while
@@ -19,6 +20,9 @@ describe("motionVars", () => {
   it("zeroes travel but keeps a fade duration when motion is reduced", () => {
     const vars = motionVars(true);
     expect(vars["--travel"]).toBe("0px");
+    // Both distances must zero — missing one leaves movement in exactly the place
+    // it is most noticeable.
+    expect(vars["--travel-lg"]).toBe("0px");
     expect(vars["--dur-base"]).toBe(`${DURATION_REDUCED.base}ms`);
     expect(DURATION_REDUCED.base).toBeGreaterThan(0);
   });
