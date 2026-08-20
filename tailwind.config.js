@@ -1,6 +1,8 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+import plugin from "tailwindcss/plugin";
 import { PALETTE as C } from "./src/constants/palette";
+import { motionVars } from "./src/constants/motion";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -37,6 +39,16 @@ export default {
         "ui-xl": ["26px", "32px"], // tile figures, the amount field
         "ui-2xl": ["31px", "36px"], // page heading
       },
+      transitionDuration: {
+        instant: "var(--dur-instant)",
+        quick: "var(--dur-quick)",
+        base: "var(--dur-base)",
+        slow: "var(--dur-slow)",
+      },
+      transitionTimingFunction: {
+        standard: "var(--ease-standard)",
+        exit: "var(--ease-exit)",
+      },
       colors: {
         paper: C.paper,
         card: C.card,
@@ -65,13 +77,25 @@ export default {
         code: "0.12em",
       },
       keyframes: {
-        "sheet-up": {
-          from: { transform: "translateY(14px)", opacity: "0" },
-          to: { transform: "none", opacity: "1" },
-        },
-        "fade-up": {
-          from: { opacity: "0", transform: "translateY(6px)" },
+        // `fade-in`/`fade-out` are shared with the ::view-transition rules in
+        // index.css, which is why they are named plainly.
+        "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
+        "fade-out": { from: { opacity: "1" }, to: { opacity: "0" } },
+        enter: {
+          from: { opacity: "0", transform: "translateY(var(--travel))" },
           to: { opacity: "1", transform: "none" },
+        },
+        exit: {
+          from: { opacity: "1", transform: "none" },
+          to: { opacity: "0", transform: "translateY(var(--travel))" },
+        },
+        "sheet-in": {
+          from: { opacity: "0", transform: "translateY(var(--travel))" },
+          to: { opacity: "1", transform: "none" },
+        },
+        "sheet-out": {
+          from: { opacity: "1", transform: "none" },
+          to: { opacity: "0", transform: "translateY(var(--travel))" },
         },
         shimmer: {
           from: { backgroundPosition: "200% 0" },
@@ -79,8 +103,10 @@ export default {
         },
       },
       animation: {
-        "sheet-up": "sheet-up .22s cubic-bezier(.2,.8,.2,1)",
-        "fade-up": "fade-up .32s both",
+        enter: "enter var(--dur-base) var(--ease-standard) both",
+        exit: "exit var(--dur-base) var(--ease-exit) both",
+        "sheet-in": "sheet-in var(--dur-slow) var(--ease-standard) both",
+        "sheet-out": "sheet-out var(--dur-slow) var(--ease-exit) both",
         shimmer: "shimmer 1.1s linear infinite",
       },
       spacing: {
@@ -100,5 +126,15 @@ export default {
       },
     },
   },
-  plugins: [forms],
+  plugins: [
+    forms,
+    // Emits the motion custom properties from src/constants/motion.ts so the CSS
+    // and usePresence cannot drift apart.
+    plugin(({ addBase }) => {
+      addBase({
+        ":root": motionVars(false),
+        "@media (prefers-reduced-motion: reduce)": { ":root": motionVars(true) },
+      });
+    }),
+  ],
 };

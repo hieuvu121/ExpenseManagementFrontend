@@ -42,11 +42,15 @@
   }
 }
 
+/* The token overrides live in tailwind.config.js (see motionVars). This block only
+   handles what a variable cannot express: stopping a looping animation.
+
+   The gradient lives on `.shimmer` but the animation lives on the
+   `.animate-shimmer` utility. Both sit on the same element and both are
+   single-class selectors, so this must target the utility and win on specificity
+   or the shimmer keeps looping for exactly the users who asked it to stop. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .animate-shimmer {
     animation: none !important;
-    transition: none !important;
   }
 }
