@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <pre className="mt-3 max-h-32 overflow-auto rounded border border-line-soft bg-paper p-2 text-left font-mono text-ui-2xs text-ink-soft">
             {error.message}
           </pre>
-          <Button variant="teal" className="mt-4 px-5 py-2.5" onClick={() => location.reload()}>
+          <Button variant="primary" className="mt-4 px-5 py-2.5" onClick={() => location.reload()}>
             Reload
           </Button>
         </div>

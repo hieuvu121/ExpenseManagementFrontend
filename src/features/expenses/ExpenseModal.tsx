@@ -11,7 +11,7 @@ import { parseMoneyInput, vnd } from "../../utils/money";
 import { parseExpenseText } from "../../utils/parseExpenseText";
 import { Button } from "../../components/ui/Button";
 import { Sheet } from "../../components/ui/Sheet";
-import { ManualExpenseForm } from "./ManualExpenseForm";
+import { ManualExpenseForm, type ManualErrors } from "./ManualExpenseForm";
 import { PasteTextForm } from "./PasteTextForm";
 import { emptyDraft, type ExpenseDraft } from "./expenseDraft";
 
@@ -34,10 +34,21 @@ export function ExpenseModal() {
   const [draft, setDraft] = useState<ExpenseDraft>(() =>
     emptyDraft(openTab, ME, household?.members ?? []),
   );
+  const [errors, setErrors] = useState<ManualErrors>({});
 
   if (!household) return null;
 
-  const patch = (changes: Partial<ExpenseDraft>) => setDraft((d) => ({ ...d, ...changes }));
+  const patch = (changes: Partial<ExpenseDraft>) => {
+    setDraft((d) => ({ ...d, ...changes }));
+    // Clear a field's error the moment the user starts fixing it, rather than
+    // leaving it accusing them until they submit again.
+    setErrors((e) => {
+      const next = { ...e };
+      if (changes.amount !== undefined) delete next.amount;
+      if (changes.participants !== undefined) delete next.participants;
+      return next;
+    });
+  };
   const isAdmin = household.admin === ME;
   const status: Expense["status"] = isAdmin ? "accepted" : "pending";
 
@@ -45,13 +56,24 @@ export function ExpenseModal() {
     const amount = parseMoneyInput(draft.amount);
     const title = draft.title.trim() || "Expense";
 
-    if (!amount) return toast("Enter an amount first");
-    if (!draft.participants.length) return toast("Pick at least one person to split with");
+    // Collect every problem at once — reporting them one at a time makes the
+    // user submit repeatedly to discover what else is wrong.
+    const found: ManualErrors = {};
+    if (!amount) found.amount = "Enter how much it cost.";
+    if (!draft.participants.length) found.participants = "Pick at least one person to split with.";
+    if (amount && draft.splitMode === "custom") {
+      const sum = draft.participants.reduce((s, name) => s + (draft.custom[name] ?? 0), 0);
+      if (sum !== amount) found.amount = `The parts have to add up to ${vnd(amount)} ₫.`;
+    }
+
+    if (Object.keys(found).length) {
+      setErrors(found);
+      if (found.amount) document.getElementById("expense-amount")?.focus();
+      return;
+    }
 
     let custom: Record<string, number> | null = null;
     if (draft.splitMode === "custom") {
-      const sum = draft.participants.reduce((s, name) => s + (draft.custom[name] ?? 0), 0);
-      if (sum !== amount) return toast(`The parts have to add up to ${vnd(amount)} ₫`);
       custom = Object.fromEntries(draft.participants.map((n) => [n, draft.custom[n] ?? 0]));
     }
 
@@ -125,14 +147,14 @@ export function ExpenseModal() {
     draft.tab === "manual" ? (
       <>
         <Button onClick={close}>Cancel</Button>
-        <Button variant="teal" onClick={saveManual}>
+        <Button variant="primary" onClick={saveManual}>
           {isAdmin ? "Save & approve" : "Send for approval"}
         </Button>
       </>
     ) : draft.parsed?.length ? (
       <>
         <Button onClick={close}>Cancel</Button>
-        <Button variant="teal" onClick={saveParsed} disabled={!keepingCount}>
+        <Button variant="primary" onClick={saveParsed} disabled={!keepingCount}>
           Add {keepingCount} {keepingCount === 1 ? "expense" : "expenses"}
         </Button>
       </>
@@ -181,7 +203,7 @@ export function ExpenseModal() {
         aria-labelledby={`expense-tab-${draft.tab}`}
       >
         {draft.tab === "manual" ? (
-          <ManualExpenseForm household={household} draft={draft} patch={patch} />
+          <ManualExpenseForm household={household} draft={draft} patch={patch} errors={errors} />
         ) : (
           <PasteTextForm
             household={household}

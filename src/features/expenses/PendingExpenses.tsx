@@ -20,6 +20,8 @@ export function PendingExpenses({ household }: { household: Household }) {
   const approve = useHouseholdStore((s) => s.approve);
   const decline = useHouseholdStore((s) => s.decline);
   const withdraw = useHouseholdStore((s) => s.withdraw);
+  const restore = useHouseholdStore((s) => s.restore);
+  const addExpenses = useHouseholdStore((s) => s.addExpenses);
   const toast = useToast();
 
   const isAdmin = household.admin === ME;
@@ -48,17 +50,31 @@ export function PendingExpenses({ household }: { household: Household }) {
             expense={expense}
             first={i === 0}
             isAdmin={isAdmin}
+            // Every one of these is someone else's money and none of them
+            // asked for confirmation. A confirm dialog trains people to click
+            // through it; an undo actually gets used.
             onApprove={() => {
               approve(expense.id);
-              toast(`Approved “${expense.title}”`);
+              toast(`Approved “${expense.title}”`, {
+                label: "Undo",
+                onClick: () => restore(expense.id),
+              });
             }}
             onDecline={() => {
               decline(expense.id);
-              toast(`Declined “${expense.title}”`);
+              toast(`Declined “${expense.title}”`, {
+                label: "Undo",
+                onClick: () => restore(expense.id),
+              });
             }}
             onWithdraw={() => {
+              // withdraw deletes the row, so undo has to put the object back.
+              const removed = expense;
               withdraw(expense.id);
-              toast("Expense withdrawn");
+              toast("Expense withdrawn", {
+                label: "Undo",
+                onClick: () => addExpenses([removed]),
+              });
             }}
           />
         ))

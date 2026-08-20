@@ -10,6 +10,7 @@ import { maskMoney, parseMoneyInput } from "../../utils/money";
 import { Button } from "../../components/ui/Button";
 import { Chip } from "../../components/ui/Chip";
 import { Field, Input } from "../../components/ui/Input";
+import { errorId } from "../../utils/id";
 import { Sheet } from "../../components/ui/Sheet";
 import { EmptyState } from "../../components/common/EmptyState";
 
@@ -24,6 +25,7 @@ export function CreateHouseholdModal() {
   const [members, setMembers] = useState<string[]>([ME]);
   const [newMember, setNewMember] = useState("");
   const [created, setCreated] = useState<Household | null>(null);
+  const [nameError, setNameError] = useState("");
 
   const openCreated = () => {
     if (!created) return;
@@ -37,7 +39,7 @@ export function CreateHouseholdModal() {
         title="Household created"
         onClose={close}
         footer={
-          <Button variant="teal" onClick={openCreated}>
+          <Button variant="primary" onClick={openCreated}>
             Open it
           </Button>
         }
@@ -71,7 +73,11 @@ export function CreateHouseholdModal() {
   };
 
   const submit = () => {
-    if (!name.trim()) return toast("Give the household a name first");
+    if (!name.trim()) {
+      setNameError("Give the household a name.");
+      document.getElementById("household-name")?.focus();
+      return;
+    }
     const household = createHousehold({
       name: name.trim(),
       budget: parseMoneyInput(budget) || 300_000,
@@ -88,20 +94,26 @@ export function CreateHouseholdModal() {
       footer={
         <>
           <Button onClick={close}>Cancel</Button>
-          <Button variant="teal" onClick={submit}>
+          <Button variant="primary" onClick={submit}>
             Create
           </Button>
         </>
       }
     >
-      <Field label="Household name" htmlFor="household-name">
+      <Field label="Household name" htmlFor="household-name" error={nameError}>
         <Input
           id="household-name"
           autoFocus
           autoComplete="off"
           placeholder="21B Tran Quang Dieu, Thao Dien apartment…"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          aria-invalid={!!nameError || undefined}
+          aria-describedby={nameError ? errorId("household-name") : undefined}
+          className={nameError ? "border-rose focus:border-rose focus:ring-rose/[.12]" : undefined}
+          onChange={(e) => {
+            setName(e.target.value);
+            setNameError("");
+          }}
         />
       </Field>
 

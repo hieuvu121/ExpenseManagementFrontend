@@ -8,12 +8,14 @@ interface MoneyInputProps {
   onChange: (masked: string) => void;
   /** `large` is the headline amount at the top of the expense sheet. */
   size?: "large" | "small";
+  invalid?: boolean;
+  describedBy?: string;
   className?: string;
 }
 
 /** Numeric input that re-formats with thousands separators as you type. */
 export const MoneyInput = forwardRef<HTMLInputElement, MoneyInputProps>(function MoneyInput(
-  { id, value, onChange, size = "large", className },
+  { id, value, onChange, size = "large", invalid, describedBy, className },
   ref,
 ) {
   if (size === "small") {
@@ -41,10 +43,13 @@ export const MoneyInput = forwardRef<HTMLInputElement, MoneyInputProps>(function
         autoComplete="off"
         placeholder="0"
         value={value}
+        aria-invalid={invalid || undefined}
+        aria-describedby={describedBy}
         onChange={(e) => onChange(maskMoney(e.target.value))}
         className={cn(
           "w-full rounded-md border border-line bg-card py-2 pl-3 pr-11 font-mono text-ui-2xl font-semibold",
           "focus:border-teal focus:outline-none focus:ring-[3px] focus:ring-teal/[.12]",
+          invalid && "border-rose focus:border-rose focus:ring-rose/[.12]",
           className,
         )}
       />

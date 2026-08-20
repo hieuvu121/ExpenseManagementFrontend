@@ -1,5 +1,6 @@
 import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
+import { errorId } from "../../utils/id";
 
 const BASE =
   "w-full rounded-md border border-line bg-card px-3 py-2.5 text-ui-base " +
@@ -29,11 +30,18 @@ interface FieldProps {
   htmlFor?: string;
   /** Small right-aligned control in the label row, e.g. "Select all". */
   aside?: React.ReactNode;
+  /**
+   * Validation message, shown under the control. Errors belong next to the
+   * field that caused them — a toast at the bottom of the viewport makes the
+   * user match a message *there* to a control *here* from memory, and it is
+   * gone before a slow reader gets to it.
+   */
+  error?: string;
   children: React.ReactNode;
   className?: string;
 }
 
-export function Field({ label, htmlFor, aside, children, className }: FieldProps) {
+export function Field({ label, htmlFor, aside, error, children, className }: FieldProps) {
   return (
     <div className={cn("mb-4", className)}>
       <div className="mb-1.5 flex items-baseline justify-between gap-3">
@@ -46,6 +54,15 @@ export function Field({ label, htmlFor, aside, children, className }: FieldProps
         {aside}
       </div>
       {children}
+      {error && (
+        <p
+          id={htmlFor ? errorId(htmlFor) : undefined}
+          role="alert"
+          className="mt-1.5 text-ui-xs font-medium text-rose-text"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }

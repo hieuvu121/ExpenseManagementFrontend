@@ -26,7 +26,7 @@ export function WelcomeScreen() {
           </p>
 
           <div className="mt-5 flex flex-col gap-2 xsm:flex-row">
-            <Button variant="teal" className="flex-1 py-3" onClick={() => openModal("create")}>
+            <Button variant="primary" className="flex-1 py-3" onClick={() => openModal("create")}>
               Create a household
             </Button>
             <Button className="flex-1 py-3" onClick={() => openModal("join")}>

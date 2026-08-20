@@ -11,3 +11,9 @@ export const inviteCode = (): string =>
     { length: 6 },
     () => CODE_ALPHABET[Math.floor(Math.random() * CODE_ALPHABET.length)],
   ).join("");
+
+/**
+ * The id a field's error message carries, so the control can point
+ * `aria-describedby` at it and screen readers read the two together.
+ */
+export const errorId = (htmlFor: string) => `${htmlFor}-error`;

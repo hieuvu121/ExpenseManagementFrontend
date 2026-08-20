@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ME } from "../constants/config";
+import { FAKE_LATENCY, ME } from "../constants/config";
 import { seedHouseholds } from "../services/mockData";
 import type { Expense, Household, Settlement } from "../types/domain";
 import { makeExpense } from "../services/mockData";
@@ -7,7 +7,15 @@ import { makeExpense } from "../services/mockData";
 interface HouseholdState {
   households: Household[];
   activeId: string;
+  /** True until the household list has arrived. Drives the app-level skeleton. */
+  loading: boolean;
 
+  /**
+   * Loads the household list. Today that is the local seed behind the same
+   * simulated latency the pagination mock uses; it is the single seam where the
+   * real `GET /app/v1/households` call goes.
+   */
+  hydrate: () => void;
   setActive: (id: string) => void;
   addHousehold: (household: Household) => void;
 
@@ -16,13 +24,13 @@ interface HouseholdState {
   decline: (expenseId: number) => void;
   /** Author action — pulls back an expense that is still pending. */
   withdraw: (expenseId: number) => void;
+  /** Puts a reviewed expense back in the queue. Backs Undo on approve/decline. */
+  restore: (expenseId: number) => void;
 
   addExpenses: (expenses: Expense[]) => void;
   /** Records a member paying another member, clearing that debt. */
   recordSettlement: (settlement: Settlement) => void;
 }
-
-const seeded = seedHouseholds();
 
 /** Applies `fn` to the active household, leaving the others untouched. */
 const mapActive = (
@@ -37,9 +45,20 @@ const setStatus = (id: number, status: Expense["status"]) => (h: Household) => (
   expenses: h.expenses.map((e) => (e.id === id ? { ...e, status } : e)),
 });
 
-export const useHouseholdStore = create<HouseholdState>()((set) => ({
-  households: seeded,
-  activeId: seeded[0]?.id ?? "",
+export const useHouseholdStore = create<HouseholdState>()((set, get) => ({
+  households: [],
+  activeId: "",
+  loading: true,
+
+  hydrate: () => {
+    // StrictMode mounts effects twice in development; without this the seed
+    // would be fetched (and the skeleton shown) twice.
+    if (get().households.length) return;
+    setTimeout(() => {
+      const seeded = seedHouseholds();
+      set({ households: seeded, activeId: seeded[0]?.id ?? "", loading: false });
+    }, FAKE_LATENCY);
+  },
 
   setActive: (id) => set({ activeId: id }),
 
@@ -48,6 +67,7 @@ export const useHouseholdStore = create<HouseholdState>()((set) => ({
 
   approve: (expenseId) => set((s) => mapActive(s, setStatus(expenseId, "accepted"))),
   decline: (expenseId) => set((s) => mapActive(s, setStatus(expenseId, "declined"))),
+  restore: (expenseId) => set((s) => mapActive(s, setStatus(expenseId, "pending"))),
 
   withdraw: (expenseId) =>
     set((s) =>

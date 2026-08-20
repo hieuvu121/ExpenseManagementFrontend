@@ -3,9 +3,11 @@ import { useNavigate } from "react-router";
 import { joinHousehold } from "../../services/householdsApi";
 import { useHouseholdStore } from "../../stores/useHouseholdStore";
 import { useModalStore } from "../../stores/useModalStore";
+import { cn } from "../../utils/cn";
 import type { Household } from "../../types/domain";
 import { Button } from "../../components/ui/Button";
 import { Field, Input } from "../../components/ui/Input";
+import { errorId } from "../../utils/id";
 import { Sheet } from "../../components/ui/Sheet";
 import { EmptyState } from "../../components/common/EmptyState";
 
@@ -26,7 +28,7 @@ export function JoinHouseholdModal() {
         onClose={close}
         footer={
           <Button
-            variant="teal"
+            variant="primary"
             onClick={() => {
               close();
               navigate(`/households/${joined.id}/dashboard`);
@@ -61,13 +63,13 @@ export function JoinHouseholdModal() {
       footer={
         <>
           <Button onClick={close}>Cancel</Button>
-          <Button variant="teal" onClick={submit}>
+          <Button variant="primary" onClick={submit}>
             Join
           </Button>
         </>
       }
     >
-      <Field label="6-character invite code" htmlFor="invite-code">
+      <Field label="6-character invite code" htmlFor="invite-code" error={error}>
         <Input
           id="invite-code"
           autoFocus
@@ -80,12 +82,15 @@ export function JoinHouseholdModal() {
             setError("");
           }}
           onKeyDown={(e) => e.key === "Enter" && submit()}
-          className="text-center font-mono text-ui-xl uppercase tracking-[.34em]"
+          aria-invalid={!!error || undefined}
+          aria-describedby={error ? errorId("invite-code") : undefined}
+          className={cn(
+            "text-center font-mono text-ui-xl uppercase tracking-[.34em]",
+            error && "border-rose focus:border-rose focus:ring-rose/[.12]",
+          )}
         />
 
-        {error ? (
-          <div className="mt-1.5 text-ui-xs text-rose-text">{error}</div>
-        ) : (
+        {!error && (
           <div className="mt-1.5 text-ui-xs text-ink-soft">
             Ask the household admin for it. Try <b>TB9K3M</b> to see how it works.
           </div>

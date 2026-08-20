@@ -6,17 +6,21 @@ import { parseMoneyInput, vnd } from "../../utils/money";
 import { CategoryDot } from "../../components/common/CategoryDot";
 import { Chip } from "../../components/ui/Chip";
 import { Field, Input } from "../../components/ui/Input";
+import { errorId } from "../../utils/id";
 import { MoneyInput } from "../../components/ui/MoneyInput";
 import { ApprovalNote } from "./ApprovalNote";
 import { seedCustomSplit, type ExpenseDraft } from "./expenseDraft";
+
+export type ManualErrors = Partial<Record<"amount" | "participants", string>>;
 
 interface ManualExpenseFormProps {
   household: Household;
   draft: ExpenseDraft;
   patch: (changes: Partial<ExpenseDraft>) => void;
+  errors: ManualErrors;
 }
 
-export function ManualExpenseForm({ household, draft, patch }: ManualExpenseFormProps) {
+export function ManualExpenseForm({ household, draft, patch, errors }: ManualExpenseFormProps) {
   const total = parseMoneyInput(draft.amount);
   const customSum = draft.participants.reduce((sum, name) => sum + (draft.custom[name] ?? 0), 0);
   const difference = total - customSum;
@@ -37,10 +41,12 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
 
   return (
     <>
-      <Field label="Amount" htmlFor="expense-amount">
+      <Field label="Amount" htmlFor="expense-amount" error={errors.amount}>
         <MoneyInput
           id="expense-amount"
           value={draft.amount}
+          invalid={!!errors.amount}
+          describedBy={errors.amount ? errorId("expense-amount") : undefined}
           onChange={(amount) => patch({ amount })}
         />
       </Field>
@@ -90,6 +96,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
 
       <Field
         label="Split between"
+        error={errors.participants}
         aside={
           <button
             type="button"
