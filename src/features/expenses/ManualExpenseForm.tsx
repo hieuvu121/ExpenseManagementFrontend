@@ -94,7 +94,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
           <button
             type="button"
             onClick={() => patch({ participants: allSelected ? [] : [...household.members] })}
-            className="tap inline-flex items-center text-xs font-semibold text-teal-dark hover:underline"
+            className="tap inline-flex items-center text-ui-xs font-semibold text-teal-dark hover:underline"
           >
             {allSelected ? "Clear all" : "Select all"}
           </button>
@@ -139,7 +139,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
         </div>
 
         {draft.splitMode === "even" ? (
-          <div className="mt-1.5 text-xs text-ink-soft">
+          <div className="mt-1.5 text-ui-xs text-ink-soft">
             {draft.participants.length && total ? (
               <>
                 <b className={NUM}>{vnd(total / draft.participants.length)} ₫</b> each
@@ -155,7 +155,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
             {draft.participants.map((name) => (
               <div
                 key={name}
-                className="flex items-center gap-2.5 border-b border-line-soft py-[7px] text-[13.5px]"
+                className="flex items-center gap-2.5 border-b border-line-soft py-1.5 text-ui-sm"
               >
                 <span className="flex-1">
                   {name}
@@ -173,7 +173,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
 
             <div
               className={cn(
-                "mt-2 text-[12.5px] font-semibold",
+                "mt-2 text-ui-xs font-semibold",
                 difference === 0 && total ? "text-moss-text" : "text-rose-text",
               )}
             >
@@ -185,7 +185,7 @@ export function ManualExpenseForm({ household, draft, patch }: ManualExpenseForm
                     ? `Short by ${vnd(difference)} ₫`
                     : `Over by ${vnd(-difference)} ₫`}
             </div>
-            <div className="mt-1.5 text-xs text-ink-soft">
+            <div className="mt-1.5 text-ui-xs text-ink-soft">
               For a 30/30/40 split, type the amounts directly — the total has to match.
             </div>
           </div>

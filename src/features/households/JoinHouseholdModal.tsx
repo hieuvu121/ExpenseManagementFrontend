@@ -80,13 +80,13 @@ export function JoinHouseholdModal() {
             setError("");
           }}
           onKeyDown={(e) => e.key === "Enter" && submit()}
-          className="text-center font-mono text-[26px] uppercase tracking-[.34em]"
+          className="text-center font-mono text-ui-xl uppercase tracking-[.34em]"
         />
 
         {error ? (
-          <div className="mt-1.5 text-[12.5px] text-rose-text">{error}</div>
+          <div className="mt-1.5 text-ui-xs text-rose-text">{error}</div>
         ) : (
-          <div className="mt-1.5 text-xs text-ink-soft">
+          <div className="mt-1.5 text-ui-xs text-ink-soft">
             Ask the household admin for it. Try <b>TB9K3M</b> to see how it works.
           </div>
         )}

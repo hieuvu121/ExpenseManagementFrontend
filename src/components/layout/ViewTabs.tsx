@@ -12,14 +12,14 @@ export function ViewTabs({ householdId }: { householdId: string }) {
   const openModal = useModalStore((s) => s.open);
 
   return (
-    <nav className="mb-[22px] flex items-end gap-[22px] border-b-2 border-ink">
+    <nav className="mb-5.5 flex items-end gap-5.5 border-b-2 border-ink">
       {TABS.map((tab) => (
         <NavLink
           key={tab.to}
           to={`/households/${householdId}/${tab.to}`}
           className={({ isActive }) =>
             cn(
-              "-mb-0.5 border-b-2 pb-2.5 text-sm font-semibold",
+              "-mb-0.5 border-b-2 pb-2.5 text-ui-base font-semibold",
               isActive ? "border-ink text-ink" : "border-transparent text-ink-soft hover:text-ink",
             )
           }

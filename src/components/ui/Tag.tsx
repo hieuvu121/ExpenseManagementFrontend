@@ -14,7 +14,7 @@ export function Tag({ tone, children }: { tone: Tone; children: ReactNode }) {
   return (
     <span
       className={cn(
-        "rounded-[3px] px-[5px] py-0.5 text-[11px] font-semibold uppercase tracking-tag",
+        "rounded-[3px] px-1 py-0.5 text-ui-2xs font-semibold uppercase tracking-tag",
         TONES[tone],
       )}
     >

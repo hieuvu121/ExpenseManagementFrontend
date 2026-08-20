@@ -31,7 +31,7 @@ export function RecentExpensesTable({ household }: { household: Household }) {
         action={
           <Link
             to={`/households/${household.id}/ledger`}
-            className="tap inline-flex items-center text-xs font-semibold text-teal-dark hover:underline"
+            className="tap inline-flex items-center text-ui-xs font-semibold text-teal-dark hover:underline"
           >
             See all →
           </Link>
@@ -39,14 +39,14 @@ export function RecentExpensesTable({ household }: { household: Household }) {
       />
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
+        <table className="w-full border-collapse text-ui-base">
           <thead>
             <tr>
               {["Member", "Category", "Amount", "Status"].map((head, i) => (
                 <th
                   key={head}
                   className={cn(
-                    "border-b border-line pb-2 text-[11px] font-semibold uppercase tracking-label text-ink-soft",
+                    "border-b border-line pb-2 text-ui-2xs font-semibold uppercase tracking-label text-ink-soft",
                     i === 1 && "hidden shell:table-cell",
                     i >= 2 ? "text-right" : "text-left",
                   )}
@@ -62,23 +62,23 @@ export function RecentExpensesTable({ household }: { household: Household }) {
                 key={expense.id}
                 className={cn(expense.status === "declined" && "opacity-50")}
               >
-                <td className="border-b border-line-soft py-[11px] align-middle">
+                <td className="border-b border-line-soft py-2.5 align-middle">
                   <div className="flex items-center gap-2.5">
                     <Avatar name={expense.payer} />
                     <span>
                       <span className="block font-medium">{expense.payer}</span>
-                      <span className="block text-xs text-ink-soft">{expense.title}</span>
+                      <span className="block text-ui-xs text-ink-soft">{expense.title}</span>
                     </span>
                   </div>
                 </td>
-                <td className="hidden border-b border-line-soft py-[11px] align-middle shell:table-cell">
+                <td className="hidden border-b border-line-soft py-2.5 align-middle shell:table-cell">
                   <CategoryDot category={expense.category} />
                   {CATEGORIES[expense.category].label}
                 </td>
-                <td className={cn(NUM, "border-b border-line-soft py-[11px] text-right font-semibold")}>
+                <td className={cn(NUM, "border-b border-line-soft py-2.5 text-right font-semibold")}>
                   {vnd(expense.amount)}
                 </td>
-                <td className="border-b border-line-soft py-[11px] text-right align-middle">
+                <td className="border-b border-line-soft py-2.5 text-right align-middle">
                   <StatusPill status={expense.status} />
                 </td>
               </tr>

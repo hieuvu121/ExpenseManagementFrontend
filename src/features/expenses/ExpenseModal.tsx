@@ -148,7 +148,7 @@ export function ExpenseModal() {
           <div
             role="tablist"
             aria-label="How to add the expense"
-            className="mx-5 flex gap-1 rounded-md bg-hover p-[3px]"
+            className="mx-5 flex gap-1 rounded-md bg-hover p-0.5"
           >
             {TABS.map(({ id, label }) => (
               <button
@@ -164,7 +164,7 @@ export function ExpenseModal() {
                 onKeyDown={onTabKey}
                 onClick={() => patch({ tab: id })}
                 className={cn(
-                  "tap flex-1 rounded p-2 text-[13.5px] font-semibold transition-colors",
+                  "tap flex-1 rounded p-2 text-ui-sm font-semibold transition-colors",
                   draft.tab === id ? "bg-card text-ink" : "text-ink-soft hover:text-ink",
                 )}
               >

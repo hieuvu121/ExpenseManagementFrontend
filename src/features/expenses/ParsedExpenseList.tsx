@@ -39,7 +39,7 @@ export function ParsedExpenseList({ household, parsed, onDrop, onEdit }: ParsedE
   return (
     <>
       <Field label="Here's what it read">
-        <div className="rounded-md border border-l-[3px] border-line border-l-cobalt bg-card px-[15px] py-[13px] text-[14.5px] leading-[1.85]">
+        <div className="rounded-md border border-l-[3px] border-line border-l-cobalt bg-card px-3.5 py-3 text-ui-base leading-[1.85]">
           {parsed.map((expense, i) => (
             <p key={i}>
               {expense.highlights.map((segment, j) =>
@@ -58,7 +58,7 @@ export function ParsedExpenseList({ household, parsed, onDrop, onEdit }: ParsedE
           ))}
         </div>
 
-        <div className="mt-2 flex flex-wrap gap-3.5 text-[11px] text-ink-soft">
+        <div className="mt-2 flex flex-wrap gap-3.5 text-ui-2xs text-ink-soft">
           <span>
             <i className="mr-1.5 inline-block h-0.5 w-3.5 bg-teal align-middle" />
             amount
@@ -79,15 +79,15 @@ export function ParsedExpenseList({ household, parsed, onDrop, onEdit }: ParsedE
           expense.dropped ? null : (
             <div
               key={index}
-              className="mt-2.5 animate-fade-up rounded-md border border-line bg-card px-3.5 py-[13px]"
+              className="mt-2.5 animate-fade-up rounded-md border border-line bg-card px-3.5 py-3"
               style={{ animationDelay: `${index * 60}ms` }}
             >
               <div className="flex items-baseline gap-2.5">
-                <span className="flex-1 text-[15px] font-semibold">{expense.title}</span>
-                <span className={cn(NUM, "text-base font-semibold")}>{vnd(expense.amount)} ₫</span>
+                <span className="flex-1 text-ui-base font-semibold">{expense.title}</span>
+                <span className={cn(NUM, "text-ui-md font-semibold")}>{vnd(expense.amount)} ₫</span>
               </div>
 
-              <div className="mt-1 text-[12.5px] text-ink-soft">
+              <div className="mt-1 text-ui-xs text-ink-soft">
                 <CategoryDot category={expense.category} />
                 {CATEGORIES[expense.category].label} · {expense.payer} paid · split evenly{" "}
                 {expense.participants.length} ways · {MONTHS[expense.date.getMonth()]}{" "}
@@ -98,14 +98,14 @@ export function ParsedExpenseList({ household, parsed, onDrop, onEdit }: ParsedE
                 <button
                   type="button"
                   onClick={() => onEdit(index)}
-                  className="tap inline-flex items-center text-xs font-semibold text-teal-dark hover:underline"
+                  className="tap inline-flex items-center text-ui-xs font-semibold text-teal-dark hover:underline"
                 >
                   Edit or change the split
                 </button>
                 <button
                   type="button"
                   onClick={() => onDrop(index)}
-                  className="tap inline-flex items-center text-xs font-semibold text-rose-text hover:underline"
+                  className="tap inline-flex items-center text-ui-xs font-semibold text-rose-text hover:underline"
                 >
                   Drop this one
                 </button>

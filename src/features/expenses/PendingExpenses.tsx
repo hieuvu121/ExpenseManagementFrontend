@@ -82,12 +82,12 @@ function PendingRow({ expense, first, isAdmin, onApprove, onDecline, onWithdraw 
   return (
     <div
       className={cn(
-        "grid grid-cols-[1fr_auto] items-center gap-3 py-[11px]",
+        "grid grid-cols-[1fr_auto] items-center gap-3 py-2.5",
         !first && "border-t border-line-soft",
       )}
     >
       <div>
-        <div className="flex flex-wrap items-center gap-2 text-[14.5px] font-medium">
+        <div className="flex flex-wrap items-center gap-2 text-ui-base font-medium">
           {expense.title}
           <Pill tone="pending">
             {expense.addedBy === ME ? "added by you" : `added by ${expense.addedBy}`}
@@ -95,7 +95,7 @@ function PendingRow({ expense, first, isAdmin, onApprove, onDecline, onWithdraw 
           {expense.source === "ai" && <Tag tone="ai">AI</Tag>}
           {expense.custom && <Tag tone="custom">custom split</Tag>}
         </div>
-        <div className="mt-0.5 text-xs text-ink-soft">
+        <div className="mt-0.5 text-ui-xs text-ink-soft">
           {expense.payer} paid · {CATEGORIES[expense.category].label} · split{" "}
           {expense.participants.length} ways · {MONTHS[expense.date.getMonth()]} {dmy(expense.date)}
           {mine > 0 && (
@@ -108,20 +108,20 @@ function PendingRow({ expense, first, isAdmin, onApprove, onDecline, onWithdraw 
       </div>
 
       <div className="flex items-center gap-3">
-        <span className={cn(NUM, "text-[15px] font-semibold")}>{vnd(expense.amount)} ₫</span>
+        <span className={cn(NUM, "text-ui-base font-semibold")}>{vnd(expense.amount)} ₫</span>
         {isAdmin ? (
           <>
             <button
               type="button"
               onClick={onApprove}
-              className="tap inline-flex items-center justify-center rounded-full border border-moss px-3.5 py-[5px] text-[12.5px] font-semibold text-moss-text hover:bg-moss hover:text-white"
+              className="tap inline-flex items-center justify-center rounded-full border border-moss px-3.5 py-1 text-ui-xs font-semibold text-moss-text hover:bg-moss hover:text-white"
             >
               Approve
             </button>
             <button
               type="button"
               onClick={onDecline}
-              className="tap inline-flex items-center justify-center rounded-full border border-line px-3.5 py-[5px] text-[12.5px] font-semibold text-ink-soft hover:border-rose hover:text-rose-text"
+              className="tap inline-flex items-center justify-center rounded-full border border-line px-3.5 py-1 text-ui-xs font-semibold text-ink-soft hover:border-rose hover:text-rose-text"
             >
               Decline
             </button>
@@ -130,12 +130,12 @@ function PendingRow({ expense, first, isAdmin, onApprove, onDecline, onWithdraw 
           <button
             type="button"
             onClick={onWithdraw}
-            className="tap inline-flex items-center justify-center rounded-full border border-line px-3.5 py-[5px] text-[12.5px] font-semibold text-ink-soft hover:border-rose hover:text-rose-text"
+            className="tap inline-flex items-center justify-center rounded-full border border-line px-3.5 py-1 text-ui-xs font-semibold text-ink-soft hover:border-rose hover:text-rose-text"
           >
             Withdraw
           </button>
         ) : (
-          <span className="text-xs font-semibold text-gold-text">Waiting</span>
+          <span className="text-ui-xs font-semibold text-gold-text">Waiting</span>
         )}
       </div>
     </div>

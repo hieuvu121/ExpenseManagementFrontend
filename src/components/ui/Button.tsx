@@ -18,7 +18,7 @@ export function Button({ variant = "default", className, ...props }: ButtonProps
   return (
     <button
       className={cn(
-        "rounded-md px-3.5 py-2 text-[13.5px] font-semibold transition-colors",
+        "rounded-md px-3.5 py-2 text-ui-sm font-semibold transition-colors",
         "disabled:cursor-not-allowed disabled:opacity-40",
         VARIANTS[variant],
         className,

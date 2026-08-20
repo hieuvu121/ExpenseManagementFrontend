@@ -8,7 +8,7 @@ interface CardProps {
 
 export function Card({ children, className }: CardProps) {
   return (
-    <div className={cn("rounded-md border border-line bg-card px-[18px] py-4", className)}>
+    <div className={cn("rounded-md border border-line bg-card px-4.5 py-4", className)}>
       {children}
     </div>
   );
@@ -25,8 +25,8 @@ export function CardHeader({ title, subtitle, action }: CardHeaderProps) {
   return (
     <div className="mb-3.5 flex items-start gap-3">
       <div className="flex-1">
-        <h2 className="text-base font-semibold">{title}</h2>
-        {subtitle && <p className="mt-px text-[12.5px] text-ink-soft">{subtitle}</p>}
+        <h2 className="text-ui-md font-semibold">{title}</h2>
+        {subtitle && <p className="mt-px text-ui-xs text-ink-soft">{subtitle}</p>}
       </div>
       {action}
     </div>

@@ -14,10 +14,10 @@ interface TileProps {
 
 function Tile({ label, value, hint, tone }: TileProps) {
   return (
-    <div className="rounded-md border border-line bg-card px-3.5 py-[13px]">
+    <div className="rounded-md border border-line bg-card px-3.5 py-3">
       <div className={EYEBROW}>{label}</div>
-      <div className={cn(NUM, "mt-[5px] text-[23px] font-semibold", tone)}>{value}</div>
-      <div className="mt-0.5 text-[11.5px] text-ink-soft">{hint}</div>
+      <div className={cn(NUM, "mt-1 text-ui-lg font-semibold", tone)}>{value}</div>
+      <div className="mt-0.5 text-ui-2xs text-ink-soft">{hint}</div>
     </div>
   );
 }

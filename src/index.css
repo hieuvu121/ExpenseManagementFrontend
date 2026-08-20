@@ -1,12 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Be+Vietnam+Pro:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-paper text-ink font-sans text-[15px] leading-normal antialiased;
+    @apply bg-paper text-ink font-sans text-ui-base antialiased;
   }
 
   /* One global focus ring instead of repeating focus styles on every control. */

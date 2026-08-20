@@ -18,26 +18,26 @@ export function Sidebar() {
       className={cn(
         "border-b border-line px-4 pb-3 pt-4",
         "shell:sticky shell:top-0 shell:h-screen shell:overflow-auto shell:border-b-0 shell:border-r",
-        "shell:px-[18px] shell:pb-[90px] shell:pt-[22px]",
+        "shell:px-4.5 shell:pb-24 shell:pt-5.5",
       )}
     >
-      <div className="mb-[22px] flex items-baseline gap-2">
-        <b className="disp-narrow font-display text-[21px] font-extrabold">Housemate</b>
-        <span className="text-[11px] text-ink-soft">shared household expenses</span>
+      <div className="mb-5.5 flex items-baseline gap-2">
+        <b className="disp-narrow font-display text-ui-lg font-extrabold">Housemate</b>
+        <span className="text-ui-2xs text-ink-soft">shared household expenses</span>
       </div>
 
-      <div className="mb-[22px] rounded-md border border-line bg-card px-[13px] py-3">
+      <div className="mb-5.5 rounded-md border border-line bg-card px-3 py-3">
         <div className={EYEBROW}>Your balance</div>
         <div
           className={cn(
             NUM,
-            "mt-[3px] text-[25px] font-semibold",
+            "mt-0.5 text-ui-xl font-semibold",
             total > 0 ? "text-moss-text" : total < 0 ? "text-rose-text" : "",
           )}
         >
           {signed(total)} ₫
         </div>
-        <div className="text-[11.5px] text-ink-soft">
+        <div className="text-ui-2xs text-ink-soft">
           {total > SETTLED_THRESHOLD
             ? "the house owes you"
             : total < -SETTLED_THRESHOLD
@@ -58,7 +58,7 @@ export function Sidebar() {
               to={`/households/${household.id}/dashboard`}
               className={({ isActive }) =>
                 cn(
-                  "flex flex-none items-center gap-2.5 rounded-md p-2.5 text-sm",
+                  "flex flex-none items-center gap-2.5 rounded-md p-2.5 text-ui-base",
                   "border border-line bg-card shell:w-full shell:flex-1 shell:border-0 shell:bg-transparent",
                   // The selected state has to read at every width — without the
                   // unprefixed classes the mobile scroller gave no "you are here".
@@ -70,11 +70,11 @@ export function Sidebar() {
             >
               <span className="flex-1 truncate">{household.name}</span>
               {pending > 0 && (
-                <span className="grid h-[17px] min-w-[17px] place-items-center rounded-full bg-gold-text px-1 text-[11px] font-bold text-white">
+                <span className="grid h-[17px] min-w-[17px] place-items-center rounded-full bg-gold-text px-1 text-ui-2xs font-bold text-white">
                   {pending}
                 </span>
               )}
-              <span className={cn(NUM, "hidden text-[11.5px] opacity-75 shell:inline")}>
+              <span className={cn(NUM, "hidden text-ui-2xs opacity-75 shell:inline")}>
                 {Math.abs(net) < SETTLED_THRESHOLD ? "—" : signed(net)}
               </span>
             </NavLink>
@@ -100,7 +100,7 @@ function SidebarLink({ onClick, children }: { onClick: () => void; children: Rea
       type="button"
       onClick={onClick}
       className={cn(
-        "block w-full rounded-md px-2.5 py-[7px] text-[13.5px] text-ink-soft hover:bg-hover hover:text-ink",
+        "block w-full rounded-md px-2.5 py-1.5 text-ui-sm text-ink-soft hover:bg-hover hover:text-ink",
         "border border-line bg-card text-center",
         "shell:border-0 shell:bg-transparent shell:text-left",
       )}

@@ -9,4 +9,4 @@ export const NUM = "font-mono tabular-nums tracking-[-0.02em]";
 
 /** The small uppercase labels above values and form fields. */
 export const EYEBROW =
-  "text-[11px] font-semibold uppercase tracking-eyebrow text-ink-soft";
+  "text-ui-2xs font-semibold uppercase tracking-eyebrow text-ink-soft";

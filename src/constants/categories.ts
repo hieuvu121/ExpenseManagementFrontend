@@ -1,19 +1,20 @@
 import type { CategoryId } from "../types/domain";
+import { PALETTE } from "./palette";
 
 export interface CategoryMeta {
   id: CategoryId;
   label: string;
-  /** Hex, because Chart.js and inline dot backgrounds need a literal value. */
+  /** Literal hex — Chart.js and the inline dot background cannot read a class. */
   color: string;
 }
 
 export const CATEGORIES: Record<CategoryId, CategoryMeta> = {
-  food: { id: "food", label: "Food & drink", color: "#C33F5C" },
-  market: { id: "market", label: "Groceries", color: "#1E7A4B" },
-  bill: { id: "bill", label: "Utilities", color: "#2F5FA8" },
-  home: { id: "home", label: "Household", color: "#A87A1F" },
-  move: { id: "move", label: "Transport", color: "#00857D" },
-  other: { id: "other", label: "Other", color: "#8E9A93" },
+  food: { id: "food", label: "Food & drink", color: PALETTE.rose },
+  market: { id: "market", label: "Groceries", color: PALETTE.moss },
+  bill: { id: "bill", label: "Utilities", color: PALETTE.cobalt },
+  home: { id: "home", label: "Household", color: PALETTE.gold },
+  move: { id: "move", label: "Transport", color: PALETTE.teal },
+  other: { id: "other", label: "Other", color: PALETTE.inkMuted },
 };
 
 export const CATEGORY_LIST: CategoryMeta[] = Object.values(CATEGORIES);

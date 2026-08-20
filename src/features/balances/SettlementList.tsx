@@ -27,7 +27,7 @@ export function SettlementList({ householdId, settlements }: SettlementListProps
 
   if (!settlements.length) {
     return (
-      <div className="mt-3.5 border-t border-line-soft pt-3 text-[13px] text-ink-soft">
+      <div className="mt-3.5 border-t border-line-soft pt-3 text-ui-sm text-ink-soft">
         Nobody owes anybody.
       </div>
     );
@@ -40,7 +40,7 @@ export function SettlementList({ householdId, settlements }: SettlementListProps
       {pagination.visible.map((settlement) => (
         <div
           key={`${settlement.from}>${settlement.to}`}
-          className="flex items-center gap-2.5 border-b border-line-soft py-2 text-[13.5px]"
+          className="flex items-center gap-2.5 border-b border-line-soft py-2 text-ui-sm"
         >
           <span>{settlement.from}</span>
           <span className="text-ink-soft">→</span>
@@ -52,7 +52,7 @@ export function SettlementList({ householdId, settlements }: SettlementListProps
               recordSettlement(settlement);
               toast("Payment recorded");
             }}
-            className="tap inline-flex items-center justify-center rounded-full border border-line bg-paper px-3 py-1 text-xs font-semibold text-teal-dark hover:border-teal"
+            className="tap inline-flex items-center justify-center rounded-full border border-line bg-paper px-3 py-1 text-ui-xs font-semibold text-teal-dark hover:border-teal"
           >
             Mark paid
           </button>

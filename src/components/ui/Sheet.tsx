@@ -88,12 +88,12 @@ export function Sheet({ title, onClose, children, footer, belowHeader }: SheetPr
         )}
       >
         <div className="sticky top-0 z-[2] flex items-center gap-3 border-b border-line bg-paper px-5 pb-3 pt-4">
-          <h2 className="disp-wide flex-1 font-display text-[19px] font-bold">{title}</h2>
+          <h2 className="disp-wide flex-1 font-display text-ui-lg font-bold">{title}</h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="tap grid shrink-0 place-items-center rounded-full text-xl text-ink-soft hover:bg-hover"
+            className="tap grid shrink-0 place-items-center rounded-full text-ui-lg text-ink-soft hover:bg-hover"
           >
             ×
           </button>
@@ -101,7 +101,7 @@ export function Sheet({ title, onClose, children, footer, belowHeader }: SheetPr
 
         {belowHeader}
 
-        <div className="px-5 pb-[22px] pt-[18px]">{children}</div>
+        <div className="px-5 pb-5.5 pt-4.5">{children}</div>
 
         {footer && (
           <div className="sticky bottom-0 flex items-center justify-end gap-2 border-t border-line bg-paper px-5 py-3">

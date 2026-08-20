@@ -46,14 +46,14 @@ export function CreateHouseholdModal() {
           You're the admin here, so anything your housemates add will wait for your approval. Share
           the code below.
           <div className="mt-3.5 inline-flex items-center gap-2.5 rounded-md border border-dashed border-line bg-card px-2.5 py-1.5">
-            <b className="font-mono text-[22px] font-semibold tracking-code">{created.code}</b>
+            <b className="font-mono text-ui-lg font-semibold tracking-code">{created.code}</b>
             <button
               type="button"
               onClick={async () => {
                 await navigator.clipboard?.writeText(created.code);
                 toast(`Copied invite code ${created.code}`);
               }}
-              className="tap inline-flex items-center text-[11.5px] font-semibold text-teal-dark hover:underline"
+              className="tap inline-flex items-center text-ui-2xs font-semibold text-teal-dark hover:underline"
             >
               Copy
             </button>
@@ -115,7 +115,7 @@ export function CreateHouseholdModal() {
           value={budget}
           onChange={(e) => setBudget(maskMoney(e.target.value))}
         />
-        <div className="mt-1.5 text-xs text-ink-soft">
+        <div className="mt-1.5 text-ui-xs text-ink-soft">
           Drawn as the dashed line on the charts. Leave it blank if you'd rather not.
         </div>
       </Field>
@@ -153,7 +153,7 @@ export function CreateHouseholdModal() {
           <Button onClick={addMember}>Add</Button>
         </div>
 
-        <div className="mt-1.5 text-xs text-ink-soft">
+        <div className="mt-1.5 text-ui-xs text-ink-soft">
           Anyone joining with the invite code shows up here automatically.
         </div>
       </Field>

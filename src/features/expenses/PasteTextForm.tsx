@@ -30,7 +30,7 @@ export function PasteTextForm({ household, draft, patch, onParse, onEdit }: Past
           onChange={(e) => patch({ text: e.target.value })}
         />
 
-        <div className="mt-1.5 text-xs text-ink-soft">
+        <div className="mt-1.5 text-ui-xs text-ink-soft">
           Reads amounts like 1tr280, 165k, 850 nghìn, 1.2m — and phrasing in both English and
           Vietnamese (“I paid”, “t trả”, “split evenly”, “chia đều”, “yesterday”, “hôm qua”).
           Several sentences become several expenses. Text-parsed expenses always split evenly; use

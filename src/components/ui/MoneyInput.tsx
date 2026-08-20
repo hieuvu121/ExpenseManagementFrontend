@@ -43,12 +43,12 @@ export const MoneyInput = forwardRef<HTMLInputElement, MoneyInputProps>(function
         value={value}
         onChange={(e) => onChange(maskMoney(e.target.value))}
         className={cn(
-          "w-full rounded-md border border-line bg-card py-2 pl-3 pr-11 font-mono text-[30px] font-semibold",
+          "w-full rounded-md border border-line bg-card py-2 pl-3 pr-11 font-mono text-ui-2xl font-semibold",
           "focus:border-teal focus:outline-none focus:ring-[3px] focus:ring-teal/[.12]",
           className,
         )}
       />
-      <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-lg text-ink-soft">
+      <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-ui-md text-ink-soft">
         ₫
       </span>
     </div>

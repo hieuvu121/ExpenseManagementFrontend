@@ -20,7 +20,7 @@ export function EmptyState({ title, children, variant = "boxed", className }: Em
         className,
       )}
     >
-      <b className="mb-1 block text-[15px] text-ink">{title}</b>
+      <b className="mb-1 block text-ui-base text-ink">{title}</b>
       {children}
     </div>
   );

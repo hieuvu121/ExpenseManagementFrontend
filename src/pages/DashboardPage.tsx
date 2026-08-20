@@ -25,11 +25,11 @@ export default function DashboardPage() {
     <>
       <SummaryTiles household={household} />
 
-      <section className="mt-[26px]">
+      <section className="mt-6.5">
         <PendingExpenses household={household} />
       </section>
 
-      <section className="mt-[26px]">
+      <section className="mt-6.5">
         <Card>
           <CardHeader
             title="Daily expense"
@@ -41,7 +41,7 @@ export default function DashboardPage() {
         </Card>
       </section>
 
-      <div className="mt-[26px] grid gap-3.5 shell:grid-cols-[1.55fr_1fr]">
+      <div className="mt-6.5 grid gap-3.5 shell:grid-cols-[1.55fr_1fr]">
         <Card>
           <CardHeader
             title="Statistics"
@@ -61,7 +61,7 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <section className="mt-[26px]">
+      <section className="mt-6.5">
         <RecentExpensesTable household={household} />
       </section>
     </>

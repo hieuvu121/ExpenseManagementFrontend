@@ -32,13 +32,13 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
         return (
           <div
             key={name}
-            className="grid grid-cols-[64px_1fr_96px] items-center gap-2 py-[5px] shell:grid-cols-[82px_1fr_108px] shell:gap-2.5"
+            className="grid grid-cols-[64px_1fr_96px] items-center gap-2 py-1 shell:grid-cols-[82px_1fr_108px] shell:gap-2.5"
           >
-            <div className={cn("truncate text-[13.5px]", name === ME && "font-semibold")}>
+            <div className={cn("truncate text-ui-sm", name === ME && "font-semibold")}>
               {name}
               {name === household.admin && " ★"}
               {name === ME && (
-                <span className="ml-1.5 text-[11px] font-semibold uppercase tracking-tag text-ink-soft">
+                <span className="ml-1.5 text-ui-2xs font-semibold uppercase tracking-tag text-ink-soft">
                   you
                 </span>
               )}
@@ -67,7 +67,7 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
             <div
               className={cn(
                 NUM,
-                "text-right text-xs font-medium shell:text-[13px]",
+                "text-right text-ui-xs font-medium shell:text-ui-sm",
                 owed ? "text-moss-text" : owes ? "text-rose-text" : "text-ink-soft",
               )}
             >

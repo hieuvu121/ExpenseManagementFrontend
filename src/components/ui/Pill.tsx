@@ -13,7 +13,7 @@ export function Pill({ tone, children }: { tone: Tone; children: ReactNode }) {
   return (
     <span
       className={cn(
-        "whitespace-nowrap rounded-full px-2 py-[3px] text-[11px] font-semibold uppercase tracking-[.06em]",
+        "whitespace-nowrap rounded-full px-2 py-0.5 text-ui-2xs font-semibold uppercase tracking-[.06em]",
         TONES[tone],
       )}
     >

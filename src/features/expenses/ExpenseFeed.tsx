@@ -42,31 +42,31 @@ export function ExpenseFeed({ household }: { household: Household }) {
               )}
             >
               <div className="text-center leading-[1.1]">
-                <div className={cn(NUM, "text-[15px] font-semibold")}>{dmy(expense.date)}</div>
-                <div className="text-[11px] uppercase tracking-tag text-ink-soft">
+                <div className={cn(NUM, "text-ui-base font-semibold")}>{dmy(expense.date)}</div>
+                <div className="text-ui-2xs uppercase tracking-tag text-ink-soft">
                   {MONTHS[expense.date.getMonth()]}
                 </div>
               </div>
 
               <div>
-                <div className="flex flex-wrap items-center gap-[7px] text-[14.5px] font-medium">
+                <div className="flex flex-wrap items-center gap-1.5 text-ui-base font-medium">
                   {expense.title}
                   {expense.status !== "accepted" && <StatusPill status={expense.status} />}
                   {expense.source === "ai" && <Tag tone="ai">AI</Tag>}
                   {expense.custom && <Tag tone="custom">custom</Tag>}
                   {expense.kind === "settlement" && <Tag tone="settle">settle up</Tag>}
                 </div>
-                <div className="mt-px text-xs text-ink-soft">
+                <div className="mt-px text-ui-xs text-ink-soft">
                   <CategoryDot category={expense.category} />
                   {expense.payer} paid · split {expense.participants.length} ways
                 </div>
               </div>
 
               <div className="text-right">
-                <div className={cn(NUM, "text-[14.5px] font-semibold")}>
+                <div className={cn(NUM, "text-ui-base font-semibold")}>
                   {vnd(expense.amount)} ₫
                 </div>
-                <div className={cn(NUM, "text-[11.5px] text-ink-soft")}>
+                <div className={cn(NUM, "text-ui-2xs text-ink-soft")}>
                   {mine ? `your share ${vnd(mine)}` : "not your split"}
                 </div>
               </div>

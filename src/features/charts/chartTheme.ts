@@ -36,7 +36,7 @@ Chart.register(
 
 Chart.defaults.font.family = '"Be Vietnam Pro", system-ui, sans-serif';
 Chart.defaults.font.size = 11;
-Chart.defaults.color = PALETTE.tick;
+Chart.defaults.color = PALETTE.inkSoft;
 
 export const money = (n: number) => `${vnd(n)} ₫`;
 
@@ -45,13 +45,13 @@ export const AXES = {
   x: {
     grid: { display: false },
     border: { color: PALETTE.line },
-    ticks: { color: PALETTE.tick },
+    ticks: { color: PALETTE.inkSoft },
   },
   y: {
     beginAtZero: true,
-    grid: { color: PALETTE.line },
+    grid: { color: PALETTE.lineSoft },
     border: { display: false },
-    ticks: { color: PALETTE.tick, callback: (v: string | number) => compact(Number(v)), maxTicksLimit: 5 },
+    ticks: { color: PALETTE.inkSoft, callback: (v: string | number) => compact(Number(v)), maxTicksLimit: 5 },
   },
 } satisfies ChartOptions<"bar">["scales"];
 

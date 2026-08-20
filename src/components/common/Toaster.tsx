@@ -23,7 +23,7 @@ export function Toaster() {
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className="max-w-[88vw] animate-fade-up rounded-full bg-ink px-4 py-[9px] text-center text-[13.5px] text-ink-invert"
+          className="max-w-[88vw] animate-fade-up rounded-full bg-ink px-4 py-2 text-center text-ui-sm text-ink-invert"
         >
           {toast.text}
         </div>

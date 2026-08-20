@@ -2,7 +2,7 @@ import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } fro
 import { cn } from "../../utils/cn";
 
 const BASE =
-  "w-full rounded-md border border-line bg-card px-3 py-2.5 text-[15px] " +
+  "w-full rounded-md border border-line bg-card px-3 py-2.5 text-ui-base " +
   "focus:border-teal focus:outline-none focus:ring-[3px] focus:ring-teal/[.12]";
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
@@ -39,7 +39,7 @@ export function Field({ label, htmlFor, aside, children, className }: FieldProps
       <div className="mb-1.5 flex items-baseline justify-between gap-3">
         <label
           htmlFor={htmlFor}
-          className="text-[11px] font-semibold uppercase tracking-label text-ink-soft"
+          className="text-ui-2xs font-semibold uppercase tracking-label text-ink-soft"
         >
           {label}
         </label>
