@@ -186,7 +186,7 @@ export function ExpenseModal() {
                 onKeyDown={onTabKey}
                 onClick={() => patch({ tab: id })}
                 className={cn(
-                  "tap flex-1 rounded p-2 text-ui-sm font-semibold transition-colors",
+                  "tap flex-1 rounded p-2 text-ui-sm font-semibold transition-colors duration-quick ease-standard",
                   draft.tab === id ? "bg-card text-ink" : "text-ink-soft hover:text-ink",
                 )}
               >

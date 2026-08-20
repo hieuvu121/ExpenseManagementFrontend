@@ -59,7 +59,7 @@ export function Sidebar() {
               to={`/households/${household.id}/dashboard`}
               className={({ isActive }) =>
                 cn(
-                  "flex flex-none items-center gap-2.5 rounded-md p-2.5 text-ui-base",
+                  "flex flex-none items-center gap-2.5 rounded-md p-2.5 text-ui-base transition-colors duration-quick ease-standard",
                   "border border-line bg-card shell:w-full shell:flex-1 shell:border-0 shell:bg-transparent",
                   // The selected state has to read at every width — without the
                   // unprefixed classes the mobile scroller gave no "you are here".
@@ -101,7 +101,7 @@ function SidebarLink({ onClick, children }: { onClick: () => void; children: Rea
       type="button"
       onClick={onClick}
       className={cn(
-        "block w-full rounded-md px-2.5 py-1.5 text-ui-sm text-ink-soft hover:bg-hover hover:text-ink",
+        "block w-full rounded-md px-2.5 py-1.5 text-ui-sm text-ink-soft transition-colors duration-quick ease-standard hover:bg-hover hover:text-ink",
         "border border-line bg-card text-center",
         "shell:border-0 shell:bg-transparent shell:text-left",
       )}

@@ -48,7 +48,7 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
               <div className="flex h-full flex-1 justify-end">
                 {owes && (
                   <span
-                    className="block h-full rounded-[1px] bg-rose/[.85] transition-[width] duration-500"
+                    className="block h-full rounded-[1px] bg-rose/[.85] transition-[width] duration-slow ease-standard"
                     style={{ width: `${width}%` }}
                   />
                 )}
@@ -57,7 +57,7 @@ export function BalanceSpine({ household, net }: BalanceSpineProps) {
               <div className="flex h-full flex-1">
                 {owed && (
                   <span
-                    className="block h-full rounded-[1px] bg-moss/[.85] transition-[width] duration-500"
+                    className="block h-full rounded-[1px] bg-moss/[.85] transition-[width] duration-slow ease-standard"
                     style={{ width: `${width}%` }}
                   />
                 )}

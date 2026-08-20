@@ -20,7 +20,7 @@ export function ViewTabs({ householdId }: { householdId: string }) {
           to={`/households/${householdId}/${tab.to}`}
           className={({ isActive }) =>
             cn(
-              "-mb-0.5 border-b-2 pb-2.5 text-ui-base font-semibold",
+              "-mb-0.5 border-b-2 pb-2.5 text-ui-base font-semibold transition-colors duration-quick ease-standard",
               isActive ? "border-ink text-ink" : "border-transparent text-ink-soft hover:text-ink",
             )
           }

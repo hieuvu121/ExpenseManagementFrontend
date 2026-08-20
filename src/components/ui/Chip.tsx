@@ -37,7 +37,7 @@ export function Chip({
       aria-label={ariaLabel}
       onClick={onClick}
       className={cn(
-        "tap inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-ui-sm transition-colors",
+        "tap inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-ui-sm transition-colors duration-quick ease-standard",
         pressed ? on : "border-line bg-card hover:border-ink",
         className,
       )}

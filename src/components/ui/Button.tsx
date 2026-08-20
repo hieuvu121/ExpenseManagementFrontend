@@ -28,7 +28,11 @@ export function Button({ variant = "secondary", className, ...props }: ButtonPro
       type="button"
       className={cn(
         "tap inline-flex items-center justify-center rounded-md px-3.5 py-2",
-        "text-ui-sm font-semibold transition-colors",
+        "text-ui-sm font-semibold",
+        // transform is in the list so the press dip eases too; without it the
+        // scale would snap and the release would glide.
+        "transition-[color,background-color,border-color,transform]",
+        "duration-instant ease-standard active:scale-[.98]",
         "disabled:cursor-not-allowed disabled:opacity-40",
         VARIANTS[variant],
         className,
