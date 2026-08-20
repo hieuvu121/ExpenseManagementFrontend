@@ -30,7 +30,11 @@ export function AppShell() {
   return (
     <div className="grid min-h-screen shell:grid-cols-[262px_1fr]">
       <Sidebar />
-      <main className="max-w-[1000px] px-4 pb-[130px] pt-[18px] shell:px-[30px] shell:pb-[120px] shell:pt-6">
+      {/* mx-auto: max-w alone pinned the column to the left edge, leaving ~650px
+          of empty paper on a 1920px screen. The tall bottom padding clears the
+          fixed MobileActionBar, which is shell:hidden — so the desktop shell
+          does not need it. */}
+      <main className="mx-auto w-full max-w-[1000px] px-4 pb-[130px] pt-[18px] shell:px-[30px] shell:pb-10 shell:pt-6">
         {household ? (
           <>
             <HouseholdHeader household={household} />
